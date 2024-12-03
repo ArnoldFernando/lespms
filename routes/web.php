@@ -28,20 +28,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'auth'])->name(
 
 // Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
-    route::view('admin', 'test.admin');
+    route::view('admin', 'Admin.dashboard');
 });
 
 
 
 // service provider routes
 Route::middleware(['auth', 'service_provider'])->group(function () {
-    route::view('services', 'test.serviceprovider');
-
+    route::view('services', 'Service.dashboard');
 });
 
 
 
 // user routes
 Route::middleware(['auth', 'user'])->group(function () {
-    route::view('user', 'test.user');
+    route::view('user', 'Client.dashboard');
 });
