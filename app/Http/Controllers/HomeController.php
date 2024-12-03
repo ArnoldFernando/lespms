@@ -33,18 +33,13 @@ class HomeController extends Controller
 
             $usertype = Auth()->user()->usertype;
 
-            if($usertype == 'admin') {
-                return view ('test.admin');
-            }
-            else if($usertype == 'service_provider') {
-                return view('test.serviceprovider');
-            }
-            else if($usertype == 'user') {
-                return view('test.user');
-            }
-                else return redirect()->back();
-
+            if ($usertype == 'admin') {
+                return view('test.admin');
+            } else if ($usertype == 'service_provider') {
+                return view('layouts.serv-provider-layout');
+            } else if ($usertype == 'user') {
+                return view('layouts.client-layout');
+            } else return redirect()->back();
         }
-
     }
 }
