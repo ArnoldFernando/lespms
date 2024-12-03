@@ -36,9 +36,9 @@ class HomeController extends Controller
             if ($usertype == 'admin') {
                 return view('test.admin');
             } else if ($usertype == 'service_provider') {
-                return view('layouts.serv-provider-layout');
+                return view('test.serviceprovider');
             } else if ($usertype == 'user') {
-                return view('layouts.client-layout');
+                return view('test.user');
             } else return redirect()->back();
         }
     }
