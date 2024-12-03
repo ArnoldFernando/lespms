@@ -52,9 +52,9 @@
                     <hr class="mt-0">
 
                     {{-- CONTENT --}}
-                    @section('content')
+                    <main class="py-4">
                         {{ $slot }}
-                    @stop
+                    </main>
 
                 </div>
                 <!-- /.container-fluid -->
