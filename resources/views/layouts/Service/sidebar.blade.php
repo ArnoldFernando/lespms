@@ -27,6 +27,20 @@
          Interface
      </div>
 
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+             aria-expanded="true" aria-controls="collapseOne">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>Event Services</span>
+         </a>
+         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('services.create') }}">Add Service</a>
+                 <a class="collapse-item" href="{{ route('services.index') }}">List</a>
+             </div>
+         </div>
+     </li>
+
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
