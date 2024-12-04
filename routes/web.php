@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // service provider routes
 Route::middleware(['auth', 'service_provider'])->group(function () {
     route::view('services', 'Service.dashboard');
+    route::resource('services', EventServiceController::class);
 });
 
 
@@ -44,3 +46,5 @@ Route::middleware(['auth', 'service_provider'])->group(function () {
 Route::middleware(['auth', 'user'])->group(function () {
     route::view('user', 'Client.dashboard');
 });
+
+
