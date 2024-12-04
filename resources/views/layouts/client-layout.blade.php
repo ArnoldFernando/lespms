@@ -39,25 +39,11 @@
                 {{-- NAVIGATON --}}
                 @include('layouts.Client.navigation')
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-2">
-                        <h4 class="h4 mb-0 text-gray-800">Dashboard</h4>
-                        {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
-                    </div>
-
-                    <hr class="mt-0">
-
-                    {{-- CONTENT --}}
-                    <main class="py-4">
-                        {{ $slot }}
-                    </main>
-
-                </div>
-                <!-- /.container-fluid -->
+                {{-- CONTENT --}}
+                <main class="py-0">
+                    {{ $slot }}
+                </main>
 
             </div>
             <!-- End of Main Content -->
