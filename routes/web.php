@@ -46,5 +46,3 @@ Route::middleware(['auth', 'service_provider'])->group(function () {
 Route::middleware(['auth', 'user'])->group(function () {
     route::view('user', 'Client.dashboard');
 });
-
-
