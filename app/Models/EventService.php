@@ -9,6 +9,10 @@ class EventService extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'image' => 'array',
+    ];
+
     protected $fillable = [
             'service_provider_id',
             'title',
@@ -21,5 +25,8 @@ class EventService extends Model
             'location',
             'special_requests',
             'is_featured',
+            'image',
     ];
+
+
 }

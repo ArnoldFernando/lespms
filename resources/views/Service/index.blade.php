@@ -8,32 +8,17 @@
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">{{ $service->title }}</h5>
+                                @if ($service && !empty($service->image) && is_array($service->image))
+                                    <img src="{{ asset(str_replace('public/', 'storage/', $service->image[0])) }}"
+                                        alt="Image" style="width: 100%; height: 150px; object-fit: cover;">
+                                @else
+                                    <img src="{{ asset('assets/img/default.png') }}" alt="Default Image"
+                                        style="width: 100%; height: 150px; object-fit: cover;">
+                                @endif
                             </div>
                             <div class="card-body">
-                                <p class="card-text"><strong>Description:</strong> {{ $service->description }}</p>
-                                <p class="card-text"><strong>Rate:</strong> ${{ $service->rate }}</p>
-                                <p class="card-text"><strong>Status:</strong> {{ ucfirst($service->status) }}</p>
-                                <p class="card-text"><strong>Assigned To:</strong> {{ $service->assigned_to }}</p>
+                                <p class="card-text"><strong>Description:</strong> {{ $service->title }}</p>
                                 <p class="card-text"><strong>Location:</strong> {{ $service->location }}</p>
-                                <p class="card-text"><strong>Special Requests:</strong>
-                                    {{ $service->special_requests }}</p>
-                                <p class="card-text"><strong>Service Provider ID:</strong>
-                                    {{ $service->service_provider_id }}</p>
-
-                                @if ($service->scheduled_date)
-                                    <p class="card-text"><strong>Scheduled Date:</strong>
-                                        {{ $service->scheduled_date->format('Y-m-d') }}</p>
-                                @else
-                                    <p class="card-text"><strong>Scheduled Date:</strong> Not scheduled</p>
-                                @endif
-
-                                @if ($service->available_until)
-                                    <p class="card-text"><strong>Available Until:</strong>
-                                        {{ $service->available_until->format('Y-m-d') }}</p>
-                                @else
-                                    <p class="card-text"><strong>Available Until:</strong> N/A</p>
-                                @endif
                             </div>
                             <div class="card-footer">
                                 <!-- Button for editing or viewing -->
