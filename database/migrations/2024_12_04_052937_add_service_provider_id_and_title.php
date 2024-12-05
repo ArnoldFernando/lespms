@@ -22,10 +22,9 @@ return new class extends Migration
             $table->string('assigned_to')->nullable(); // Name or ID of the client handling the service
             $table->string('location')->nullable(); // Location where the service will take place
             $table->text('special_requests')->nullable(); // Special instructions or requests from the client
-            $table->boolean('is_featured')->default(false); // Flag to indicate if this service is a featured service
+            $table->boolean('is_featured')->default(false)->nullable(); // Flag to indicate if this service is a featured service
             $table->foreign('service_provider_id')->references('id')->on('users')->onDelete('cascade');
         });
-
     }
 
     /**
@@ -34,24 +33,23 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('event_services', function (Blueprint $table) {
-        // Drop the foreign key constraint first
-        $table->dropForeign(['service_provider_id']);
-        
-        // Drop added columns
-        $table->dropColumn([
-            'service_provider_id',
-            'title',
-            'description',
-            'rate',
-            'status',
-            'scheduled_date',
-            'available_until',
-            'assigned_to',
-            'location',
-            'special_requests',
-            'is_featured',
-        ]);  
-      });
+            // Drop the foreign key constraint first
+            $table->dropForeign(['service_provider_id']);
 
+            // Drop added columns
+            $table->dropColumn([
+                'service_provider_id',
+                'title',
+                'description',
+                'rate',
+                'status',
+                'scheduled_date',
+                'available_until',
+                'assigned_to',
+                'location',
+                'special_requests',
+                'is_featured',
+            ]);
+        });
     }
 };

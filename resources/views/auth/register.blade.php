@@ -88,7 +88,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" name="password-confirmation"
+                                        <input type="password" name="password_confirmation"
                                             class="form-control form-control-user" id="password-confirm"
                                             placeholder="Repeat Password" required autocomplete="new-password">
                                     </div>
@@ -97,6 +97,7 @@
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Register
                                     Account</button>
                             </form>
+
                             <hr>
                             <div class="text-center">
                                 <a class="small text-danger" href="forgot-password.html">Forgot Password?</a>

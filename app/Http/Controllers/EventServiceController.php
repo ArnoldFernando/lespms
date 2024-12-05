@@ -6,6 +6,7 @@ use App\Models\EventService;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreEventServiceRequest;
 use App\Http\Requests\UpdateEventServiceRequest;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
 
 class EventServiceController extends Controller
@@ -170,5 +171,42 @@ class EventServiceController extends Controller
         }
 
         return redirect()->back()->with('error', 'Image not found.');
+    }
+
+
+    public function showBookings()
+    {
+        // Fetch the authenticated user's bookings
+        $bookings = Booking::with('eventService', 'user') // Eager load eventService and user details
+            ->whereHas('eventService', function ($query) {
+                // Ensure that the event service is provided by the authenticated user
+                $query->where('service_provider_id', auth()->id());
+            })
+            ->get();
+
+        // Pass bookings to the view
+        return view('Service.booked-service.index', compact('bookings'));
+    }
+
+
+    public function updateStatus($bookingId, $status)
+    {
+        // Valid statuses for booking
+        $validStatuses = ['canceled', 'confirmed'];
+
+        // Check if the status is valid
+        if (!in_array($status, $validStatuses)) {
+            return redirect()->back()->with('error', 'Invalid status');
+        }
+
+        // Fetch the booking
+        $booking = Booking::findOrFail($bookingId);
+
+        // Update the status
+        $booking->status = $status;
+        $booking->save();
+
+        // Redirect with success message
+        return redirect()->back()->with('success', 'Booking status updated successfully');
     }
 }

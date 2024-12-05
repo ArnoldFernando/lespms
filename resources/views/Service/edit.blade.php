@@ -82,21 +82,25 @@
             <div class="form-group">
                 <label>Current Images</label>
                 <div class="row">
-                    @foreach ($eventService->image as $imagePath)
-                        <div class="col-md-3 mb-3">
-                            <div class="card">
-                                <img src="{{ asset(str_replace('public/', 'storage/', $imagePath)) }}"
-                                    alt="Event Image" class="card-img-top"
-                                    style="max-height: 150px; object-fit: cover;">
-                                <div class="card-body text-center">
-                                    <label>
-                                        <input type="checkbox" name="delete_image[]" value="{{ $imagePath }}">
-                                        Remove
-                                    </label>
+                    @if (empty($eventService->image) || count($eventService->image) === 0)
+                        <p>No image uploaded</p>
+                    @else
+                        @foreach ($eventService->image as $imagePath)
+                            <div class="col-md-3 mb-3">
+                                <div class="card">
+                                    <img src="{{ asset(str_replace('public/', 'storage/', $imagePath)) }}"
+                                        alt="Event Image" class="card-img-top"
+                                        style="max-height: 150px; object-fit: cover;">
+                                    <div class="card-body text-center">
+                                        <label>
+                                            <input type="checkbox" name="delete_image[]" value="{{ $imagePath }}">
+                                            Remove
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
