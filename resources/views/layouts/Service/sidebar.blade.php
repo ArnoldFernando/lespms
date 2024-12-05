@@ -36,7 +36,7 @@
          <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <a class="collapse-item" href="{{ route('services.create') }}">Add Service</a>
-                 <a class="collapse-item" href="{{ route('services.index') }}">My services</a>
+                 <a class="collapse-item" href="{{ route('services.index') }}">My Services</a>
              </div>
          </div>
      </li>
@@ -50,7 +50,7 @@
          </a>
          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
-                 <a class="collapse-item" href="{{ route('event-services.bookings') }}">list</a>
+                 <a class="collapse-item" href="{{ route('event-services.bookings') }}">Service List</a>
                  <a class="collapse-item" href="cards.html">Cards</a>
              </div>
          </div>
