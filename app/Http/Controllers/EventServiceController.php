@@ -176,17 +176,26 @@ class EventServiceController extends Controller
 
     public function showBookings()
     {
-        // Fetch the authenticated user's bookings
-        $bookings = Booking::with('eventService', 'user') // Eager load eventService and user details
+        // Fetch all bookings for the authenticated service provider
+        $bookings = Booking::with('eventService', 'user')
             ->whereHas('eventService', function ($query) {
-                // Ensure that the event service is provided by the authenticated user
                 $query->where('service_provider_id', auth()->id());
             })
             ->get();
 
-        // Pass bookings to the view
-        return view('Service.booked-service.index', compact('bookings'));
+        // Separate bookings into blocked and non-blocked users
+        $nonBlockedBookings = $bookings->filter(function ($booking) {
+            return !$booking->user->is_blocked; // Non-blocked users
+        });
+
+        $blockedBookings = $bookings->filter(function ($booking) {
+            return $booking->user->is_blocked; // Blocked users
+        });
+
+        // Pass both collections to the view
+        return view('Service.booked-service.index', compact('nonBlockedBookings', 'blockedBookings'));
     }
+
 
 
     public function updateStatus($bookingId, $status)

@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Add this relationship method
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'usertype',
+        'is_blocked',
     ];
 
     /**
@@ -46,6 +49,16 @@ class User extends Authenticatable
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasManyThrough(Booking::class, EventService::class, 'service_provider_id', 'event_service_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(EventService::class, 'service_provider_id');
     }
 }

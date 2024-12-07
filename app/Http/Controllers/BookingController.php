@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\User;
+use App\Notifications\BookingNotification;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -35,13 +37,33 @@ class BookingController extends Controller
         //     'notes' => 'nullable|string',
         // ]);
 
-        Booking::create([
+        // Create a booking
+        $booking = Booking::create([
             'user_id' => auth()->id(),
             'event_service_id' => $request->event_service_id,
             'booking_date' => $request->booking_date,
             'notes' => $request->notes,
         ]);
 
+        // Notify the service provider
+        $serviceProvider = User::find($booking->eventService->service_provider_id);
+        if ($serviceProvider) {
+            // Create a notification for the service provider
+            $serviceProvider->notifications()->create([
+                'message' => 'A new booking has been made for your service: ' . $booking->eventService->title,
+                'read' => false,
+            ]);
+        }
+
+        // Respond to the AJAX request
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'A new booking has been made for your service: ' . $booking->eventService->title,
+            ]);
+        }
+
+        // Redirect back for regular form submissions
         return redirect()->back()->with('success', 'Service booked successfully!');
     }
 

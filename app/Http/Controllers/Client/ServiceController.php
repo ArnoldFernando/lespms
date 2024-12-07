@@ -15,7 +15,15 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = EventService::all();
+        $services = EventService::query();
+
+        // If the user is blocked, return an empty collection of services
+        if (auth()->check() && auth()->user()->is_blocked) {
+            $services = collect();  // No services shown to blocked user
+        } else {
+            $services = EventService::all();  // Normal behavior for non-blocked users
+        }
+
         return view('client.service.index', compact('services'));
     }
 

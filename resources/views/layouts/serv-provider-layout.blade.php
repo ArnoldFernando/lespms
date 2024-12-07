@@ -27,6 +27,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+
         {{-- SIDEBAR --}}
         @include('layouts.Service.sidebar')
 
@@ -38,6 +39,7 @@
 
                 {{-- NAVIGATON --}}
                 @include('layouts.Service.navigation')
+
 
                 {{-- CONTENT --}}
                 <main class="py-0">
@@ -86,6 +88,62 @@
             </div>
         </div>
     </div>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Track processed notifications by ID
+        var processedNotifications = new Set();
+
+        // Helper function to check if a notification is recent
+        function isRecent(notification) {
+            const createdAt = new Date(notification.created_at); // Notification creation time
+            const now = new Date(); // Current time
+            const diffInMinutes = (now - createdAt) / 1000 / 60; // Difference in minutes
+            return diffInMinutes <= 1; // Return true if within 5 minutes
+        }
+
+        // Poll for new notifications every 5 seconds
+        setInterval(function() {
+            $.ajax({
+                url: '{{ route('service-provider.notifications') }}',
+                method: 'GET',
+                success: function(response) {
+                    response.new_notifications.forEach(function(notification) {
+                        // Check if the notification is recent and hasn't been processed
+                        if (isRecent(notification) && !processedNotifications.has(notification
+                                .id)) {
+                            // Mark the notification as processed
+                            processedNotifications.add(notification.id);
+
+                            // Show the notification using SweetAlert2
+                            Swal.fire({
+                                title: 'New Booking Alert!',
+                                text: notification.message,
+                                icon: 'info',
+                                confirmButtonText: 'OK'
+                            });
+
+                            // Show the notification only once (no repeated pop-ups)
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching notifications:", error);
+                }
+            });
+        }, 5000); // Poll every 5 seconds
+    </script>
+
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
