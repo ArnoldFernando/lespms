@@ -42,6 +42,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'service_provider'])->group(function () {
     route::view('services', 'Service.dashboard');
     route::resource('services', EventServiceController::class);
+    Route::get('notifications/recent', [NotificationController::class, 'getRecentNotifications'])->name('notifications.getNotifications');
+    route::resource('notifications', NotificationController::class);
     Route::get('/my-services/bookings', [EventServiceController::class, 'showBookings'])->name('event-services.bookings');
     Route::post('/my-services/bookings/{bookingId}/{status}', [EventServiceController::class, 'updateStatus'])->middleware('auth')->name('event-services.updateStatus');
 
