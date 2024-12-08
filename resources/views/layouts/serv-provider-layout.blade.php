@@ -102,47 +102,34 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // Track processed notifications by ID
-        var processedNotifications = new Set();
+        $.ajax({
+            url: '{{ route('notifications.getNotifications') }}',
+            method: 'GET',
+            success: function(response) {
+                if (response.notification && response.notification.length > 0) {
+                    const id = response.notification[0].id; // Get the ID of the first notification
 
-        // Helper function to check if a notification is recent
-        function isRecent(notification) {
-            const createdAt = new Date(notification.created_at); // Notification creation time
-            const now = new Date(); // Current time
-            const diffInMinutes = (now - createdAt) / 1000 / 60; // Difference in minutes
-            return diffInMinutes <= 1; // Return true if within 5 minutes
-        }
-
-        // Poll for new notifications every 5 seconds
-        setInterval(function() {
-            $.ajax({
-                url: '{{ route('service-provider.notifications') }}',
-                method: 'GET',
-                success: function(response) {
-                    response.new_notifications.forEach(function(notification) {
-                        // Check if the notification is recent and hasn't been processed
-                        if (isRecent(notification) && !processedNotifications.has(notification
-                                .id)) {
-                            // Mark the notification as processed
-                            processedNotifications.add(notification.id);
-
-                            // Show the notification using SweetAlert2
-                            Swal.fire({
-                                title: 'New Booking Alert!',
-                                text: notification.message,
-                                icon: 'info',
-                                confirmButtonText: 'OK'
-                            });
-
-                            // Show the notification only once (no repeated pop-ups)
+                    // Display the Swal if there are notifications
+                    Swal.fire({
+                        title: 'You have a new notification!',
+                        icon: 'info',
+                        confirmButtonText: 'View',
+                        data: {
+                            id: id
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to the notifications show page using the ID
+                            window.location.href = '{{ route('notifications.show', '') }}/' + id;
                         }
                     });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching notifications:", error);
                 }
-            });
-        }, 5000); // Poll every 5 seconds
+            },
+
+            error: function(xhr, status, error) {
+                console.error("Error fetching notifications:", error);
+            }
+        });
     </script>
 
 
