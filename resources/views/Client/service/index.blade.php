@@ -43,6 +43,13 @@
                                         data-target="#bookingModal-{{ $service->id }}">
                                         Book Service
                                     </button>
+
+
+                                    <a href="{{ route('chat', ['receiverId' => $service->service_provider_id]) }}"
+                                        class="btn btn-info mt-2">
+                                        Chat with Service provider
+                                    </a>
+
                                 </div>
 
                                 <!-- Modal -->
@@ -84,6 +91,8 @@
                                                     <button type="submit" class="btn btn-primary">Book Service</button>
                                                 </div>
                                             </form>
+
+
                                         </div>
                                     </div>
                                 </div>

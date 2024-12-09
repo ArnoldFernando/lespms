@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    @livewireStyles
 
 </head>
 
@@ -29,6 +30,7 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
+
 
 
         {{-- SIDEBAR --}}
@@ -96,6 +98,8 @@
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
+
     <!-- Include SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -152,6 +156,9 @@
     <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
 
+
+    //live wire
+    @livewireScripts
 </body>
 
 </html>

@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\BlockuserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Client\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventServiceController;
 use App\Http\Controllers\NotificationController;
+use App\Livewire\Chat;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +88,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/block-user/{user}', [BlockuserController::class, 'blockUser'])->name('user.block');
     Route::post('/unblock-user/{user}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
 });
+
+
+Route::get('/chat/{receiverId}', Chat::class)->name('chat');

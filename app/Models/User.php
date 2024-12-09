@@ -57,8 +57,24 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
-    public function services()
+    // public function services()
+    // {
+    //     return $this->hasMany(EventService::class, 'service_provider_id');
+    // }
+
+    // public function sentMessages()
+    // {
+    //     return $this->hasMany(Message::class, 'sender_id');
+    // }
+
+    public function receivedMessages()
     {
-        return $this->hasMany(EventService::class, 'service_provider_id');
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id')
+            ->orWhere('receiver_id', $this->id);
     }
 }
