@@ -52,6 +52,11 @@
                                 </button>
                             </form>
 
+                            <!-- Chat Button -->
+                            <a href="{{ route('chat', ['receiverId' => $booking->user->id]) }}"
+                                class="btn btn-info mt-2">
+                                Chat with User
+                            </a>
                             <script>
                                 function confirmBlockUser(event) {
                                     // Display a confirmation dialog
