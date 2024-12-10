@@ -11,46 +11,50 @@
         <hr class="mt-0">
 
         <div class="container-fluid">
-            <!-- Put your code here -->
-
+            <!-- Check if there are services available -->
             @if ($services->isEmpty())
-                <p>No services available.</p>
+                <p class="text-center">No services available.</p>
             @else
                 <div class="row">
                     @foreach ($services as $service)
                         <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <div class="card-header">
+                            <div class="card shadow-sm border-light rounded">
+                                <div class="card-header p-0">
                                     @if ($service && !empty($service->image) && is_array($service->image))
                                         <img src="{{ asset(str_replace('public/', 'storage/', $service->image[0])) }}"
-                                            alt="Image" style="width: 100%; height: 150px; object-fit: cover;">
+                                            alt="Service Image" class="card-img-top"
+                                            style="height: 200px; object-fit: cover;">
                                     @else
                                         <img src="{{ asset('assets/img/default.png') }}" alt="Default Image"
-                                            style="width: 100%; height: 150px; object-fit: cover;">
+                                            class="card-img-top" style="height: 200px; object-fit: cover;">
                                     @endif
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text"><strong>Description:</strong> {{ $service->title }}</p>
-                                    <p class="card-text"><strong>Location:</strong> {{ $service->location }}</p>
+                                    <h5 class="card-title text-center">{{ $service->title }}</h5>
+                                    <p class="card-text"><strong>Description:</strong>
+                                        {{ Str::limit($service->description, 20) }}</p>
+                                    <p class="card-text"><strong>Location:</strong>
+                                        {{ Str::limit($service->location, 20) }}</p>
                                 </div>
-                                <div class="card-footer">
+                                <div class="card-footer d-flex justify-content-between align-items-center">
                                     <!-- View Details Button -->
-                                    <a href="{{ route('client.service.show', $service->id) }}" class="btn btn-info">View
-                                        Details</a>
-
-                                    <!-- Book Service Button -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#bookingModal-{{ $service->id }}">
-                                        Book Service
-                                    </button>
-
-
-                                    <a href="{{ route('chat', ['receiverId' => $service->service_provider_id]) }}"
-                                        class="btn btn-info mt-2">
-                                        Chat with Service provider
+                                    <a href="{{ route('client.service.show', $service->id) }}"
+                                        class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i> View Details
                                     </a>
 
+                                    <!-- Book Service Button -->
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#bookingModal-{{ $service->id }}">
+                                        <i class="fas fa-calendar-check"></i> Book Service
+                                    </button>
                                 </div>
+
+                                <!-- Chat with Service Provider -->
+                                <a href="{{ route('chat', ['receiverId' => $service->service_provider_id]) }}"
+                                    class="btn btn-success btn-sm d-block mt-2 text-center">
+                                    <i class="fas fa-comment-alt"></i> Chat with Service Provider
+                                </a>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="bookingModal-{{ $service->id }}" tabindex="-1"
@@ -91,20 +95,17 @@
                                                     <button type="submit" class="btn btn-primary">Book Service</button>
                                                 </div>
                                             </form>
-
-
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
                     @endforeach
                 </div>
             @endif
         </div>
+
+
 
     </div>
 </x-client-layout>

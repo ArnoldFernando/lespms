@@ -2,12 +2,12 @@
  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
      <!-- Sidebar - Brand -->
-     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-         <div class="sidebar-brand-icon rotate-n-15">
-             <i class="fas fa-laugh-wink"></i>
+     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/home') }}">
+         <div class="sidebar-brand-icon">
+             <img src="{{ asset('assets/img/Logo/logo1.jpg') }}" alt="Logo" class="rounded-circle border border-black"
+                 height="50" width="50">
          </div>
-         <div class="sidebar-brand-text mx-3">Client Page</div>
-         {{-- <sup>2</sup> --}}
+         <div class="sidebar-brand-text ms-1">Client Page</div>
      </a>
 
      <!-- Divider -->
