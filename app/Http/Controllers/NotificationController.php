@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateNotificationRequest;
 use Carbon\Carbon;
 
 class NotificationController extends Controller
-{    
+{
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +18,6 @@ class NotificationController extends Controller
         // TODO: Add styling for this blade
         $notifications = Notification::all();
         return view('service.notifications.index', compact('notifications'));
-
     }
 
     /**
@@ -40,7 +39,7 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
 
     // TODO: Add styling for this blade
     {
@@ -49,7 +48,6 @@ class NotificationController extends Controller
         //
         $notification->update(['read' => true]);
         return view('service.notifications.show', compact('notification'));
-
     }
 
     /**
@@ -78,17 +76,16 @@ class NotificationController extends Controller
 
 
 
-public function getRecentNotifications()
-{
-    $oneMinuteAgo = Carbon::now()->subMinute(); 
+    public function getRecentNotifications()
+    {
+        $oneMinuteAgo = Carbon::now()->subMinute();
 
-    $notification = Notification::where('user_id', auth()->id())
-        ->where('created_at', '>=', $oneMinuteAgo)
-        ->where('read', false)
-        ->orderBy('created_at', 'desc')->get();
+        $notification = Notification::where('user_id', auth()->id())
+            ->where('created_at', '>=', $oneMinuteAgo)
+            ->where('read', false)
+            ->orderBy('created_at', 'desc')->get();
 
-    
-    return response()->json(['notification' => $notification]);
-}
 
+        return response()->json(['notification' => $notification]);
+    }
 }

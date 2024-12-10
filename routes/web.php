@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventServiceController;
 use App\Http\Controllers\NotificationController;
 use App\Livewire\Chat;
+use App\Mail\notifmail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,3 +93,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/chat/{receiverId}', Chat::class)->name('chat');
+
+// Route::get('/notif', function () {
+//     Mail::to('junfernando727@gmail.com')->send(new notifmail());
+// });

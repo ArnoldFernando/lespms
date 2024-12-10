@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\notifmail;
 use App\Models\Booking;
 use App\Models\User;
 use App\Notifications\BookingNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -31,6 +33,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the input (uncomment if needed)
         // $request->validate([
         //     'event_service_id' => 'required|exists:event_services,id',
         //     'booking_date' => 'required|date|after:today',
@@ -53,6 +56,18 @@ class BookingController extends Controller
                 'message' => 'A new booking has been made for your service: ' . $booking->eventService->title,
                 'read' => false,
             ]);
+
+            // Prepare the booking details for the email
+            $bookingDetails = [
+                'name' => auth()->user()->name, // Logged-in user's name (the one who booked)
+                'email' => auth()->user()->email, // Logged-in user's email
+                'service' => $booking->eventService->title, // Service name
+                'date' => $booking->booking_date, // Booking date
+                'notes' => $booking->notes, // Optional notes from the booking
+            ];
+
+            // Send email notification to the service provider
+            Mail::to($serviceProvider->email)->send(new notifmail($bookingDetails));
         }
 
         // Respond to the AJAX request
@@ -66,6 +81,8 @@ class BookingController extends Controller
         // Redirect back for regular form submissions
         return redirect()->back()->with('success', 'Service booked successfully!');
     }
+
+
 
 
     /**
