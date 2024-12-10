@@ -1,8 +1,18 @@
 <x-serv-provider-layout>
-    <div class="container">
-        <h1>Booked Users</h1>
-        <table class="table">
-            <thead>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-2">
+            <h5 class="h5 mb-0 text-black">User List</h5>
+            {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
+        </div>
+
+        <hr class="mt-0">
+
+        {{-- <h1>Booked Users</h1> --}}
+        <table class="table table-bordered table-striped">
+            <thead class="table-success">
                 <tr>
                     <th>User Name</th>
                     <th>Email</th>
@@ -46,4 +56,5 @@
             </tbody>
         </table>
     </div>
+
 </x-serv-provider-layout>

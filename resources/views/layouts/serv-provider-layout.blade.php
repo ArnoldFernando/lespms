@@ -137,7 +137,10 @@
     </script>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    {{-- Fontawesome --}}
+    <script src="https://kit.fontawesome.com/5c14b0052b.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
@@ -157,7 +160,7 @@
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
 
 
-    //live wire
+    {{-- //live wire --}}
     @livewireScripts
 </body>
 
