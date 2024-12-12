@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resources;
 
+use App\Http\Controllers\Controller;
 use App\Models\EventService;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreEventServiceRequest;

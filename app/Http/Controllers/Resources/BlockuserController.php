@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resources;
 
+use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class BlockuserController extends Controller
 {
