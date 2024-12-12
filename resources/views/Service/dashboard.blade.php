@@ -26,6 +26,16 @@
                             @endif
 
                             {{ __('You are logged in!') }}
+
+                            <br>
+                            total services count: {{ $ServicesCount }}
+                            <br>
+                            total bookings count: {{ $BookingsCount }}
+                            <br>
+                            total confirmed bookings count: {{ $ConfirmedBookingsCount }}
+                            <br>
+                            total pending bookings count: {{ $PendingBookingsCount }}
+
                         </div>
                     </div>
                 </div>
