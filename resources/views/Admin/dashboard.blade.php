@@ -1,5 +1,7 @@
 <x-app-layout>
+
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -11,8 +13,15 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        {{ __('You are logged in!') }}
+                        total users count: {{ $usersCount }}
+                        <br>
+                        total client count: {{ $clientUserCount }}
+                        <br>
+                        total service provider count:{{ $serviceProviderCount }}
+                        <br>
+                        total event services count:{{ $eventServicesCount }}
+                        <br>
+                        total bookings count:{{ $bookingsCount }}
                     </div>
                 </div>
             </div>
