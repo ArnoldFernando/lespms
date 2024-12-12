@@ -51,7 +51,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @include('layouts.Client.footer')
+            {{-- @include('layouts.Client.footer') --}}
             <!-- End of Footer -->
 
         </div>

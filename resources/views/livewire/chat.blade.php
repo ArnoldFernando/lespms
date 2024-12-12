@@ -1,19 +1,21 @@
 <div wire:poll="fetchMessages">
-    <!-- Your chat messages -->
-
-
-    <div class="chat-container">
+    <!-- Chat Container -->
+    <div class="chat-container border rounded shadow mx-auto"
+        style="max-width: 100%; height: 87vh; display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto;">
         <!-- Chat Header -->
-        <div class="chat-header bg-blue-500 text-dark p-4">
-            <h2>Chat with {{ $receiverName }}</h2>
+        <div class="chat-header bg-primary text-white p-1 d-flex justify-content-between align-items-center">
+            <h3 class="m-0"><i class="fa-solid fa-comment-dots me-1 fs-4 "></i>Chat with {{ $receiverName }}</h3>
+            <a href="{{ route(auth()->user()->usertype == 'service_provider' ? 'event-services.bookings' : 'client.service.index') }}"
+                class="btn btn-light">Close</a>
         </div>
 
         <!-- Messages Section -->
-        <div id="messages-container" class="p-4 bg-gray-900 h-96 overflow-y-scroll">
+        <div id="messages-container" class="p-3 bg-light overflow-auto flex-grow-1">
             @foreach ($messages as $msg)
-                <div class="{{ $msg['sender_id'] == auth()->id() ? 'text-right' : 'text-left' }}">
+                <div
+                    class="d-flex {{ $msg['sender_id'] == auth()->id() ? 'justify-content-end' : 'justify-content-start' }}">
                     <div
-                        class="inline-block p-2 rounded-lg {{ $msg['sender_id'] == auth()->id() ? 'bg-blue-500 text-white' : 'bg-gray-300' }}">
+                        class="p-2 mb-2 rounded {{ $msg['sender_id'] == auth()->id() ? 'bg-primary text-white' : 'bg-secondary text-white' }}">
                         {{ $msg['message'] }}
                     </div>
                 </div>
@@ -21,11 +23,13 @@
         </div>
 
         <!-- Message Input -->
-        <div class="p-4 bg-gray-200">
-            <form wire:submit.prevent="sendMessage" class="flex">
-                <input type="text" wire:model="message" placeholder="Type a message..."
-                    class="flex-1 px-4 py-2 border rounded-l-lg">
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-r-lg">Send</button>
+        <div class="p-3 bg-secondary bg-opacity-25 border-top">
+            <form wire:submit.prevent="sendMessage" class="d-flex">
+                <input type="text" wire:model="message" placeholder="Type a message..." class="form-control me-1"
+                    autofocus>
+                <button type="submit" class="btn btn-primary d-flex align-items-center">
+                    Send <i class="fa-solid fa-paper-plane ms-2"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -38,6 +42,4 @@
             });
         });
     </script>
-
-
 </div>
