@@ -17,7 +17,6 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with('eventService')->where('user_id', auth()->id())->get();
-        dd($bookings);
         return view('Client.booking.index', compact('bookings'));
     }
 
