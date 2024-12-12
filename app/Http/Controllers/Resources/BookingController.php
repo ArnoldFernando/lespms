@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Resources;
 
+use App\Http\Controllers\Controller;
 use App\Mail\notifmail;
 use App\Models\Booking;
 use App\Models\User;
-use App\Notifications\BookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,6 +17,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with('eventService')->where('user_id', auth()->id())->get();
+        dd($bookings);
         return view('Client.booking.index', compact('bookings'));
     }
 
