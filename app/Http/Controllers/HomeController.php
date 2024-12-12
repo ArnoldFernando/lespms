@@ -22,10 +22,6 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
-    }
 
     public function auth()
     {
@@ -34,10 +30,12 @@ class HomeController extends Controller
             $usertype = Auth()->user()->usertype;
 
             if ($usertype == 'admin') {
-                return view('Admin.dashboard');
+                return redirect()->route('admin.dashboard');
             } else if ($usertype == 'service_provider') {
-                return view('Service.dashboard');
+                return redirect()->route('service-provider.dashboard');
             } else if ($usertype == 'user') {
+                //TODO: make this a redirect to the client dashboard
+                // return redirect()->route('client.dashboard');
                 return view('Client.dashboard');
             } else return redirect()->back();
         }
