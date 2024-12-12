@@ -36,7 +36,7 @@
         <div
             class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a href="#" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">LESPMS</h1>
@@ -46,28 +46,7 @@
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#features">Features</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                                class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -97,18 +76,18 @@
                         <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
                             <div class="company-badge mb-4">
                                 <i class="bi bi-gear-fill me-2"></i>
-                                Working for your success
+                                Discover Your Next Great Adventure
                             </div>
 
                             <h1 class="mb-4">
-                                Maecenas Vitae <br>
-                                Consectetur Led <br>
-                                <span class="accent-text">Vestibulum Ante</span>
+                                Unique Destinations <br>
+                                Memorable Experiences <br>
+                                <span class="accent-text">Seamless Planning</span>
                             </h1>
 
                             <p class="mb-4 mb-md-5">
-                                Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt.
-                                Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.
+                                Explore the world with ease and create unforgettable memories. Let us guide you to your
+                                dream destination.
                             </p>
 
                             <div class="hero-buttons">
@@ -203,24 +182,28 @@
 
                     <div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
                         <span class="about-meta">MORE ABOUT US</span>
-                        <h2 class="about-title">Voluptas enim suscipit temporibus</h2>
-                        <p class="about-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                            veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        <h2 class="about-title">Explore the World with Us</h2>
+                        <p class="about-description">
+                            We are dedicated to connecting travelers with breathtaking destinations and unforgettable
+                            experiences.
+                            Whether you're seeking adventure, relaxation, or cultural immersion, our mission is to make
+                            every journey
+                            seamless and extraordinary.
+                        </p>
 
                         <div class="row feature-list-wrapper">
                             <div class="col-md-6">
                                 <ul class="feature-list">
-                                    <li><i class="bi bi-check-circle-fill"></i> Lorem ipsum dolor sit amet</li>
-                                    <li><i class="bi bi-check-circle-fill"></i> Consectetur adipiscing elit</li>
-                                    <li><i class="bi bi-check-circle-fill"></i> Sed do eiusmod tempor</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Tailored travel packages</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Expert local guides</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Hassle-free bookings</li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="feature-list">
-                                    <li><i class="bi bi-check-circle-fill"></i> Incididunt ut labore et</li>
-                                    <li><i class="bi bi-check-circle-fill"></i> Dolore magna aliqua</li>
-                                    <li><i class="bi bi-check-circle-fill"></i> Ut enim ad minim veniam</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Affordable prices</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> 24/7 customer support</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Trusted by thousands of travelers</li>
                                 </ul>
                             </div>
                         </div>
@@ -232,7 +215,7 @@
                                         <img src="assets/img/avatar-1.webp" alt="CEO Profile" class="profile-image">
                                         <div>
                                             <h4 class="profile-name">Mario Smith</h4>
-                                            <p class="profile-position">CEO &amp; Founder</p>
+                                            <p class="profile-position">Founder & Travel Enthusiast</p>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +223,7 @@
                                     <div class="contact-info d-flex align-items-center gap-2">
                                         <i class="bi bi-telephone-fill"></i>
                                         <div>
-                                            <p class="contact-label">Call us anytime</p>
+                                            <p class="contact-label">Reach us anytime</p>
                                             <p class="contact-number">+123 456-789</p>
                                         </div>
                                     </div>
@@ -252,14 +235,14 @@
                     <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="image-wrapper">
                             <div class="images position-relative" data-aos="zoom-out" data-aos-delay="400">
-                                <img src="assets/img/about-5.webp" alt="Business Meeting"
+                                <img src="assets/img/about-5.webp" alt="Travel Adventure"
                                     class="img-fluid main-image rounded-4">
-                                <img src="assets/img/about-2.webp" alt="Team Discussion"
+                                <img src="assets/img/about-2.webp" alt="Cultural Exploration"
                                     class="img-fluid small-image rounded-4">
                             </div>
                             <div class="experience-badge floating">
                                 <h3>15+ <span>Years</span></h3>
-                                <p>Of experience in business service</p>
+                                <p>Of crafting incredible journeys</p>
                             </div>
                         </div>
                     </div>
@@ -268,7 +251,6 @@
             </div>
 
         </section><!-- /About Section -->
-
 
 
         <!-- Stats Section -->
@@ -321,8 +303,9 @@
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Services</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <h2>Our Tourism Services</h2>
+                <p>Explore the best experiences with our exceptional tourism services tailored to make your journey
+                    unforgettable.</p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -332,12 +315,12 @@
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="service-card d-flex">
                             <div class="icon flex-shrink-0">
-                                <i class="bi bi-activity"></i>
+                                <i class="bi bi-compass"></i>
                             </div>
                             <div>
-                                <h3>Nesciunt Mete</h3>
-                                <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus
-                                    dolores iure perferendis tempore et consequatur.</p>
+                                <h3>Guided Tours</h3>
+                                <p>Discover the hidden gems of your destination with our experienced guides, offering
+                                    rich cultural and historical insights.</p>
                                 <a href="service-details.html" class="read-more">Read More <i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
@@ -347,12 +330,12 @@
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-card d-flex">
                             <div class="icon flex-shrink-0">
-                                <i class="bi bi-diagram-3"></i>
+                                <i class="bi bi-house-door"></i>
                             </div>
                             <div>
-                                <h3>Eosle Commodi</h3>
-                                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque
-                                    eum hic non ut nesciunt dolorem.</p>
+                                <h3>Accommodation Booking</h3>
+                                <p>We partner with top hotels, resorts, and homestays to ensure your comfort and
+                                    satisfaction throughout your stay.</p>
                                 <a href="service-details.html" class="read-more">Read More <i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
@@ -362,12 +345,12 @@
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-card d-flex">
                             <div class="icon flex-shrink-0">
-                                <i class="bi bi-easel"></i>
+                                <i class="bi bi-bus-front"></i>
                             </div>
                             <div>
-                                <h3>Ledo Markt</h3>
-                                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id
-                                    voluptas adipisci eos earum corrupti.</p>
+                                <h3>Transportation Services</h3>
+                                <p>Enjoy hassle-free travel with our transportation options, including airport transfers
+                                    and local transport arrangements.</p>
                                 <a href="service-details.html" class="read-more">Read More <i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
@@ -377,12 +360,12 @@
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-card d-flex">
                             <div class="icon flex-shrink-0">
-                                <i class="bi bi-clipboard-data"></i>
+                                <i class="bi bi-camera"></i>
                             </div>
                             <div>
-                                <h3>Asperiores Commodit</h3>
-                                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea
-                                    fuga sit provident adipisci neque.</p>
+                                <h3>Adventure Activities</h3>
+                                <p>From thrilling hikes to serene boat rides, our adventure packages are designed for
+                                    all types of travelers.</p>
                                 <a href="service-details.html" class="read-more">Read More <i
                                         class="bi bi-arrow-right"></i></a>
                             </div>
