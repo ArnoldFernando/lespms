@@ -1,71 +1,156 @@
 <x-app-layout>
+    <div class="container">
+        <h1 class="text-center mb-4">Admin Dashboard</h1>
 
-    <div class="container mt-5">
-        <h1>Dashboard</h1>
-
-        <div class="row">
-            <!-- Pie Chart for User Distribution -->
-            <div class="col-md-6">
+        <!-- First Row (Charts 1 and 2) -->
+        <div class="row mb-4">
+            <div class="col-12 col-lg-4">
                 <canvas id="userDistributionChart"></canvas>
             </div>
+            <div class="col-12 col-lg-8">
+                <canvas id="bookingStatusChart"></canvas>
+            </div>
+        </div>
 
-            <!-- Bar Chart for Event and Booking Counts -->
-            <div class="col-md-6">
-                <canvas id="eventBookingChart"></canvas>
+        <!-- Second Row (Charts 3 and 4) -->
+        <div class="row mb-4">
+            <div class="col-12 col-lg-4">
+                <canvas id="eventServiceChart"></canvas>
+            </div>
+            <div class="col-12 col-lg-8">
+                <canvas id="monthlyBookingsChart"></canvas>
             </div>
         </div>
     </div>
 
     <script>
-        // User Distribution Chart
+        // User Distribution
         const userDistributionCtx = document.getElementById('userDistributionChart').getContext('2d');
         new Chart(userDistributionCtx, {
             type: 'pie',
             data: {
-                labels: ['Clients', 'Service Providers'],
+                labels: ['Clients', 'Service Providers', 'Admins', 'Blocked Users', 'Active Users'],
                 datasets: [{
-                    data: [{{ $clientUserCount }}, {{ $serviceProviderCount }}],
-                    backgroundColor: ['#36a2eb', '#ff6384'],
-                    hoverBackgroundColor: ['#36a2eb', '#ff6384']
+                    data: [
+                        {{ $clientUserCount }},
+                        {{ $serviceProviderCount }},
+                        {{ $adminCount }},
+                        {{ $blockedUsers }},
+                        {{ $activeUsers }}
+                    ],
+                    backgroundColor: ['#36a2eb', '#ff6384', '#ffcd56', '#4bc0c0', '#9966ff']
                 }]
             },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'User Distribution'
                     }
                 }
             }
         });
 
-        // Event and Booking Counts Chart
-        const eventBookingCtx = document.getElementById('eventBookingChart').getContext('2d');
-        new Chart(eventBookingCtx, {
+        // Booking Status
+        const bookingStatusCtx = document.getElementById('bookingStatusChart').getContext('2d');
+        new Chart(bookingStatusCtx, {
             type: 'bar',
             data: {
-                labels: ['Event Services', 'Confirmed Bookings'],
+                labels: ['Confirmed', 'Pending', 'Canceled'],
                 datasets: [{
-                    label: 'Count',
-                    data: [{{ $eventServicesCount }}, {{ $bookingsCount }}],
-                    backgroundColor: ['#4caf50', '#f44336']
+                    label: 'Booking Status',
+                    data: [
+                        {{ $confirmedBookings }},
+                        {{ $pendingBookings }},
+                        {{ $canceledBookings }}
+                    ],
+                    backgroundColor: ['#4caf50', '#ff9800', '#f44336']
                 }]
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Booking Status'
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
                     }
-                },
+                }
+            }
+        });
+
+        // Event Service Status
+        const eventServiceCtx = document.getElementById('eventServiceChart').getContext('2d');
+        new Chart(eventServiceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active', 'Inactive', 'Featured'],
+                datasets: [{
+                    data: [
+                        {{ $activeServices }},
+                        {{ $inactiveServices }},
+                        {{ $featuredServices }}
+                    ],
+                    backgroundColor: ['#42a5f5', '#ef5350', '#ffa726']
+                }]
+            },
+            options: {
+                responsive: true,
                 plugins: {
                     legend: {
-                        display: false
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Event Service Status'
+                    }
+                }
+            }
+        });
+
+        // Monthly Bookings
+        const monthlyBookingsCtx = document.getElementById('monthlyBookingsChart').getContext('2d');
+        new Chart(monthlyBookingsCtx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                    'October', 'November', 'December'
+                ],
+                datasets: [{
+                    label: 'Monthly Bookings',
+                    data: {{ json_encode($bookingsPerMonth) }},
+                    borderColor: '#3e95cd',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    title: {
+                        display: true,
+                        text: 'Monthly Bookings Trend'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
             }
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </x-app-layout>
