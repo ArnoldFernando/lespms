@@ -64,8 +64,8 @@ Route::prefix('service-provider')
         Route::get('/booked-users', [BlockuserController::class, 'index'])->name('booked.users');
         Route::post('/block-user/{user}/service', [BlockuserController::class, 'blockUserFromServices'])->name('user.block.service');
         Route::patch('/user/unblock/{userId}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
-        Route::get('profile', [ProfileController::class, 'getClientProfile'])->name('profile');
-        Route::get('profile/edit', [ProfileController::class, 'editClientProfile'])->name('profile.edit');
+        Route::get('profile', [ProfileController::class, 'getServiceProviderProfile'])->name('profile');
+        Route::get('profile/edit', [ProfileController::class, 'editServiceProviderProfile'])->name('profile.edit');
         Route::put('profile/update', [ProfileController::class, 'updateProfile'])->name('update');
         Route::post('/block-user/{user}', [BlockuserController::class, 'blockUser'])->name('user.block');
         Route::post('/unblock-user/{user}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
@@ -83,8 +83,8 @@ Route::prefix('client')
         Route::resource('bookings', BookingController::class);
         Route::get('notifications/{id}', [NotificationController::class, 'showuser'])->name('notifications.show');
         Route::get('profile', [ProfileController::class, 'getClientProfile'])->name('profile');
-        Route::get('profile/edit', [ProfileController::class, 'editClientProfile'])->name('edit');
-        Route::put('profile/update', [ProfileController::class, 'updateProfile'])->name('update');
+        Route::get('profile/edit', [ProfileController::class, 'editClientProfile'])->name('profile.edit');
+        Route::put('profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
         Route::get('/chat/{receiverId}', Chat::class)->name('chat');
     });
 
