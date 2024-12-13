@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Resources\UserController ;
+use App\Http\Controllers\Resources\UserController;
 use App\Http\Controllers\Resources\ServiceController;
 use App\Http\Controllers\Resources\EventServiceController;
 use App\Http\Controllers\Resources\BookingController;
@@ -89,3 +89,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/unblock-user/{user}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
 });
 Route::get('/chat/{receiverId}', Chat::class)->name('chat');
+
+
+// Route::get('/testmail', function () {
+//     Mail::to('junfernando728@gmail.com')->send(new notifmail(''));
+// });
