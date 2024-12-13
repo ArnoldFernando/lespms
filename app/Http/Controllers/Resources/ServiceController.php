@@ -55,13 +55,6 @@ class ServiceController extends Controller
         return view('Client.service.show', compact('eventService'));
     }
 
-
-    public function view_details(string $id)
-    {
-        $eventService = Booking::with('eventService')->findOrFail($id);
-
-        return view('Client.booking.view-details', compact('eventService'));
-    }
     /**
      * Show the form for editing the specified resource.
      */
