@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Resources;
+namespace App\Http\Controllers\ServiceProvider;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
@@ -12,11 +12,6 @@ class BlockuserController extends Controller
 
     public function index()
     {
-        // Ensure the logged-in user is a service provider
-        if (auth()->user()->usertype !== 'service_provider') {
-            return redirect('/')->withErrors('Access denied.');
-        }
-
         // Fetch distinct users who booked the service provider's services
         $bookedUsers = Booking::whereHas('eventService', function ($query) {
             $query->where('service_provider_id', auth()->user()->id);
@@ -31,11 +26,6 @@ class BlockuserController extends Controller
 
     public function blockUser($userId)
     {
-        // Ensure the logged-in user is a service provider
-        if (auth()->user()->usertype !== 'service_provider') {
-            return redirect('/')->withErrors('You do not have permission to block users.');
-        }
-
         // Find the user by ID
         $user = User::find($userId);
 
@@ -55,11 +45,6 @@ class BlockuserController extends Controller
 
     public function unblockUser($userId)
     {
-        // Ensure the logged-in user is a service provider
-        if (auth()->user()->usertype !== 'service_provider') {
-            return redirect('/')->withErrors('Access denied.');
-        }
-
         // Find the user and unblock them
         $user = User::findOrFail($userId);
         $user->is_blocked = false;
@@ -72,11 +57,6 @@ class BlockuserController extends Controller
 
     public function blockUserFromServices($userId)
     {
-        // Ensure the logged-in user is a service provider
-        if (auth()->user()->usertype !== 'service_provider') {
-            return redirect('/')->withErrors('You do not have permission to block users.');
-        }
-
         // Find the user by ID
         $user = User::find($userId);
 
