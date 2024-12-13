@@ -46,7 +46,8 @@
                                             {{ ucfirst($booking->status) }}
                                         </span>
                                     </p>
-                                    <a href="{{ route('client.view-details', $booking->id) }}" class="btn btn-info">View
+                                    <a href="{{ route('client.bookings.show', $booking->id) }}"
+                                        class="btn btn-info">View
                                         Details</a>
                                 </div>
                             </div>
