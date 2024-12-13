@@ -69,7 +69,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <!-- Button for editing or viewing -->
-                                    <a href="{{ route('services.show', $service->id) }}" class="btn btn-info">View
+                                    <a href="{{ route('service-provider.services.show', $service->id) }}"
+                                        class="btn btn-info">View
                                         Details</a>
                                 </div>
                             </div>

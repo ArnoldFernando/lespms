@@ -73,7 +73,7 @@
                                 </div>
 
                                 <!-- Chat with Service Provider -->
-                                <a href="{{ route('chat', ['receiverId' => $service->service_provider_id]) }}"
+                                <a href="{{ route('client.chat', ['receiverId' => $service->service_provider_id]) }}"
                                     class="btn btn-success btn-sm d-block mt-2 text-center">
                                     <i class="fas fa-comment-alt"></i> Chat with Service Provider
                                 </a>

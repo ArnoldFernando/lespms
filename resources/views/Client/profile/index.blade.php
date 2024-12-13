@@ -35,7 +35,7 @@
             @endif
 
             <div class="mt-4">
-                <a href="{{ route('user.edit') }}" class="btn btn-primary">Edit Profile</a>
+                <a href="{{ route('client.profile.edit') }}" class="btn btn-primary">Edit Profile</a>
             </div>
         </div>
     </div>

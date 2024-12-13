@@ -73,7 +73,7 @@
                                 @if ($booking->status == 'pending')
                                     <div>
                                         <form
-                                            action="{{ route('event-services.updateStatus', ['bookingId' => $booking->id, 'status' => 'confirmed']) }}"
+                                            action="{{ route('service-provider.event-services.updateStatus', ['bookingId' => $booking->id, 'status' => 'confirmed']) }}"
                                             method="POST" class="d-inline">
                                             @csrf
                                             <button type="submit" class="btn btn-success btn-sm">Confirm</button>
@@ -105,7 +105,7 @@
                                                             data-bs-dismiss="modal">Cancel</button>
                                                         <!-- Cancel Form Inside Modal -->
                                                         <form
-                                                            action="{{ route('event-services.updateStatus', ['bookingId' => $booking->id, 'status' => 'canceled']) }}"
+                                                            action="{{ route('service-provider.event-services.updateStatus', ['bookingId' => $booking->id, 'status' => 'canceled']) }}"
                                                             method="POST" class="d-inline" id="cancelEventForm">
                                                             @csrf
                                                             <button type="submit" class="btn btn-danger">Confirm
@@ -146,7 +146,7 @@
                                                     data-bs-dismiss="modal">Cancel</button>
                                                 <!-- Block User Form in Modal -->
                                                 <form method="POST"
-                                                    action="{{ route('user.block.service', $booking->user->id) }}"
+                                                    action="{{ route('service-provider.user.block.service', $booking->user->id) }}"
                                                     class="ms-3" id="blockUserForm">
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Confirm Block</button>
@@ -159,7 +159,7 @@
                             </div>
 
                             <!-- Chat Button -->
-                            <a href="{{ route('chat', ['receiverId' => $booking->user->id]) }}"
+                            <a href="{{ route('service-provider.chat', ['receiverId' => $booking->user->id]) }}"
                                 class="btn btn-info mt-2 w-100"><i class="fa-regular fa-comments me-1"></i>
                                 Chat with User
                             </a>

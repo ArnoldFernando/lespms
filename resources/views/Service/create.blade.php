@@ -35,7 +35,7 @@
 
         {{-- Put the code here --}}
         <div class="container-fluid">
-            <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('service-provider.services.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($eventService))
                     @method('PUT') <!-- Use PUT for updates -->

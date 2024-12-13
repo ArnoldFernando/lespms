@@ -109,7 +109,7 @@
 
     <script>
         $.ajax({
-            url: '{{ route('notifications.getNotifications') }}',
+            url: '{{ route('service-provider.notifications.getNotifications') }}',
             method: 'GET',
             success: function(response) {
                 if (response.notification && response.notification.length > 0) {
@@ -126,7 +126,8 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Redirect to the notifications show page using the ID
-                            window.location.href = '{{ route('notifications.show', '') }}/' + id;
+                            window.location.href =
+                                '{{ route('service-provider.notifications.show', '') }}/' + id;
                         }
                     });
                 }

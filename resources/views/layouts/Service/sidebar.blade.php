@@ -33,14 +33,14 @@
      </div>
 
      <li class="nav-item {{ request()->routeIs('services.create') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('services.create') }}">
+         <a class="nav-link" href="{{ route('service-provider.services.create') }}">
              <i class="fa-solid fa-file-circle-plus"></i>
              <span>Add Services</span>
          </a>
      </li>
 
      <li class="nav-item {{ request()->routeIs('services.index') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('services.index') }}">
+         <a class="nav-link" href="{{ route('service-provider.services.index') }}">
              <i class="fa-solid fa-list"></i>
              <span>My Services</span></a>
      </li>
@@ -52,7 +52,7 @@
      </div>
 
      <li class="nav-item {{ request()->routeIs('event-services.bookings') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('event-services.bookings') }}">
+         <a class="nav-link" href="{{ route('service-provider.event-services.bookings') }}">
              <i class="fa-solid fa-book"></i>
              <span>Booked List</span></a>
      </li>
@@ -143,7 +143,7 @@
 
      <!-- Nav Item - Tables -->
      <li class="nav-item {{ request()->routeIs('booked.users') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('booked.users') }}">
+         <a class="nav-link" href="{{ route('service-provider.booked.users') }}">
              <i class="fa-solid fa-users"></i>
              <span>Users List</span></a>
      </li>

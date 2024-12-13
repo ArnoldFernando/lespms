@@ -13,14 +13,15 @@
         {{-- <div class="container-fluid"> --}}
         <div class="row mb-1">
             <div class="col-6 d-flex justify-content-start">
-                <a href="{{ route('services.index') }}" class="btn btn-primary">Back to Services</a>
+                <a href="{{ route('service-provider.services.index') }}" class="btn btn-primary">Back to Services</a>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <a href="{{ route('services.edit', $eventService->id) }}" class="btn btn-warning me-1">Edit
+                <a href="{{ route('service-provider.services.edit', $eventService->id) }}"
+                    class="btn btn-warning me-1">Edit
                     Service</a>
 
                 <!-- Form to delete the service -->
-                <form action="{{ route('services.destroy', $eventService->id) }}" method="POST"
+                <form action="{{ route('service-provider.services.destroy', $eventService->id) }}" method="POST"
                     style="display:inline-block;">
                     @csrf
                     @method('DELETE')
