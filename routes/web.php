@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Resources\UserController;
 use App\Http\Controllers\Resources\ServiceController;
 use App\Http\Controllers\Resources\EventServiceController;
@@ -35,6 +36,18 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'redirectUserBasedOnRole'])
     ->middleware('auth')
     ->name('home');
+
+
+Route::middleware('auth')->group(function () {
+    // client
+    Route::get('/client/profile', [ProfileController::class, 'userprofile'])->name('user.profile');
+    Route::get('/clientprofile/edit', [ProfileController::class, 'editProfile'])->name('user.edit');
+    // service provider
+    Route::get('/service-provider/profile', [ProfileController::class, 'serviceprofile'])->name('service.profile');
+    Route::get('/service-provider/profile/edit', [ProfileController::class, 'editserviceProfile'])->name('service.profile.edit');
+
+    Route::put('profile/update', [ProfileController::class, 'updateProfile'])->name('user.update');
+});
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
@@ -77,6 +90,7 @@ Route::middleware(['auth', 'user'])->group(function () {
         route::get('servicedetails/{id}', [ServiceController::class, 'view_details'])
             ->name('view-details');
         route::resource('bookings', BookingController::class);
+        Route::get('notifications/{id}', [NotificationController::class, 'showuser'])->name('notifications.show');
     });
 });
 

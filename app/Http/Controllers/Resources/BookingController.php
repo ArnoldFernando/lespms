@@ -7,6 +7,7 @@ use App\Mail\notifmail;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
@@ -55,6 +56,7 @@ class BookingController extends Controller
             $serviceProvider->notifications()->create([
                 'message' => 'A new booking has been made for your service: ' . $booking->eventService->title,
                 'read' => false,
+                'booked_by_user_id' => Auth::id(),
             ]);
 
             // Prepare the booking details for the email

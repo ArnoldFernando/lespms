@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Message;
+use App\Models\Notification;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -82,6 +84,32 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
 
             $view->with('chatUsers', $chatUsers);
+        });
+
+
+        View::composer('*', function ($view) {
+            // Fetch recent notifications for the logged-in user
+            $oneMinuteAgo = Carbon::now()->subMinute();
+
+            // Retrieve the unread notifications for the logged-in user
+            $notifications = Notification::where('user_id', auth()->id())
+
+                ->where('read', false)
+                ->with('bookedBy')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            $unreadnotifications = Notification::where('user_id', auth()->id())
+                ->where('read', false)
+                ->get();
+
+            $unreadCount = $unreadnotifications->count();
+            // Share notifications with all views
+            $view->with([
+                'notifications' => $notifications,
+                'count' =>
+                $unreadCount
+            ]);
         });
     }
 }

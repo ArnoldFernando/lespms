@@ -25,6 +25,7 @@
 </head>
 
 <body id="page-top" class="text-black">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -118,6 +119,7 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+
 
 
 
