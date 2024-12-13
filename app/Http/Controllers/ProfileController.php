@@ -14,23 +14,25 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function userprofile()
+    public function getClientProfile()
     {
         $user = Auth::user(); // Get the currently authenticated user
         return view('client.profile.index', compact('user'));
     }
-    public function editProfile()
+
+    public function editClientProfile()
     {
         $user = Auth::user(); // Get the currently authenticated user
         return view('client.profile.edit', compact('user'));
     }
 
-    public function serviceprofile()
+    public function getServiceProviderProfile()
     {
         $user = Auth::user(); // Get the currently authenticated user
         return view('service.profile.index', compact('user'));
     }
-    public function editserviceProfile()
+    
+    public function editServiceProviderProfile()
     {
         $user = Auth::user(); // Get the currently authenticated user
         return view('service.profile.edit', compact('user'));
