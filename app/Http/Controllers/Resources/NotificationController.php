@@ -51,6 +51,19 @@ class NotificationController extends Controller
         return view('service.notifications.show', compact('notification'));
     }
 
+
+    public function showuser($id)
+
+    // TODO: Add styling for this blade
+    {
+
+        $notification = Notification::findOrFail($id);
+        //
+        $notification->update(['read' => true]);
+        return view('client.notification.show', compact('notification'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreEventServiceRequest;
 use App\Http\Requests\UpdateEventServiceRequest;
 use App\Models\Booking;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class EventServiceController extends Controller
@@ -138,7 +139,7 @@ class EventServiceController extends Controller
             'image' => array_values($imagePaths), // Re-index the array
         ]);
 
-        return redirect()->route('services.index')->with('success', 'Event Service updated successfully.');
+        return redirect()->route('services.index')->with('updated-success', 'Event Service updated successfully.');
     }
 
 
@@ -216,7 +217,15 @@ class EventServiceController extends Controller
         $booking->status = $status;
         $booking->save();
 
+        // Create a notification for the user
+        Notification::create([
+            'user_id' => $booking->user_id, // User who made the booking
+            'message' => 'Your booking has been ' . $status,
+            'booked_by_user_id' => auth()->id(), // Admin or service provider who updated the status
+            'read' => false,
+        ]);
+
         // Redirect with success message
-        return redirect()->back()->with('success', 'Booking status updated successfully');
+        return redirect()->back()->with('success', 'Booking status updated successfully, and the user has been notified.');
     }
 }
