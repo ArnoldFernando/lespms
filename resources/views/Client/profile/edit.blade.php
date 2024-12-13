@@ -27,7 +27,7 @@
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-semibold">Edit Profile</h1>
 
-        <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('client.profile.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

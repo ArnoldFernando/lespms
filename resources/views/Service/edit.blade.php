@@ -10,7 +10,7 @@
 
         <hr class="mt-0">
 
-        <form action="{{ route('services.update', $eventService->id, 'data') }}" method="POST"
+        <form action="{{ route('service-provider.services.update', $eventService->id, 'data') }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PATCH')

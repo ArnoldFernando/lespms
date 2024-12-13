@@ -5,7 +5,7 @@
         <!-- Chat Header -->
         <div class="chat-header bg-primary text-white p-1 d-flex justify-content-between align-items-center">
             <h3 class="m-0"><i class="fa-solid fa-comment-dots me-1 fs-4 "></i>Chat with {{ $receiverName }}</h3>
-            <a href="{{ route(auth()->user()->usertype == 'service_provider' ? 'event-services.bookings' : 'client.service.index') }}"
+            <a href="{{ route(auth()->user()->usertype == 'service_provider' ? 'service-provider.event-services.bookings' : 'client.service.index') }}"
                 class="btn btn-light">Close</a>
         </div>
 
