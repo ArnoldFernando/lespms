@@ -64,7 +64,7 @@ class EventServiceController extends Controller
             'image' => $imagePaths,
         ]);
 
-        return redirect()->route('services.index')->with('success', 'Event Service created successfully.');
+        return redirect()->route('service-provider.services.index')->with('success', 'Event Service created successfully.');
     }
 
 
@@ -139,7 +139,7 @@ class EventServiceController extends Controller
             'image' => array_values($imagePaths), // Re-index the array
         ]);
 
-        return redirect()->route('services.index')->with('updated-success', 'Event Service updated successfully.');
+        return redirect()->route('service-provider.services.index')->with('updated-success', 'Event Service updated successfully.');
     }
 
 
@@ -151,7 +151,7 @@ class EventServiceController extends Controller
     {
         $eventService = EventService::findOrFail($id);
         $eventService->delete();
-        return redirect()->route('services.index')->with('success', 'Event Service deleted successfully.');
+        return redirect()->route('service-provider.services.index')->with('success', 'Event Service deleted successfully.');
     }
 
     public function deleteImage($id, $key)

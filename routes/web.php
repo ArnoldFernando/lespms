@@ -63,7 +63,7 @@ Route::prefix('service-provider')
         Route::post('/my-services/bookings/{bookingId}/{status}', [EventServiceController::class, 'updateStatus'])->name('event-services.updateStatus');
         Route::get('/booked-users', [BlockuserController::class, 'index'])->name('booked.users');
         Route::post('/block-user/{user}/service', [BlockuserController::class, 'blockUserFromServices'])->name('user.block.service');
-        Route::patch('/user/unblock/{userId}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
+        Route::post('/user/unblock/{userId}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
         Route::get('profile', [ProfileController::class, 'getServiceProviderProfile'])->name('profile');
         Route::get('profile/edit', [ProfileController::class, 'editServiceProviderProfile'])->name('profile.edit');
         Route::put('profile/update', [ProfileController::class, 'updateProfile'])->name('update');

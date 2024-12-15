@@ -20,7 +20,7 @@ class BookingController extends Controller
         $bookings = Booking::with('eventService')->where('user_id', auth()->id())->get();
         return view('Client.booking.index', compact('bookings'));
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -83,6 +83,5 @@ class BookingController extends Controller
         $eventService = $booking->eventService;
 
         return view('Client.booking.show', compact('eventService'));
-    }
     }
 }

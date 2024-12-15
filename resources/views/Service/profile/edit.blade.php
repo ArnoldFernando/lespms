@@ -1,5 +1,25 @@
 <x-serv-provider-layout>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                showConfirmButton: true,
+            });
+        </script>
+    @endif
 
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+                showConfirmButton: true,
+            });
+        </script>
+    @endif
 
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-semibold">Edit Profile</h1>

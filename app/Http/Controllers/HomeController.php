@@ -18,7 +18,7 @@ class HomeController extends Controller
             } else if ($usertype == 'service_provider') {
                 return redirect()->route('service-provider.dashboard');
             } else if ($usertype == 'user') {
-                return redirect()->route('client.dashboard');
+                return redirect()->route('client.service.index');
             } else return redirect()->back();
         }
     }

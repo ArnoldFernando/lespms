@@ -94,6 +94,23 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select class="form-select" name="usertype" aria-label="Default select example">
+                                            <option selected>Select role</option>
+                                            <option value="user">Client</option>
+                                            <option value="service_provider">Service Provider</option>
+                                        </select>
+                                        @error('usertype')
+                                            <div class="invalid-feedback">
+                                                <strong>{{ $message }}</strong>
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Register
                                     Account</button>
                             </form>

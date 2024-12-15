@@ -31,7 +31,7 @@ class ProfileController extends Controller
         $user = Auth::user(); // Get the currently authenticated user
         return view('service.profile.index', compact('user'));
     }
-    
+
     public function editServiceProviderProfile()
     {
         $user = Auth::user(); // Get the currently authenticated user
@@ -46,7 +46,7 @@ class ProfileController extends Controller
             'email' => 'string|email|max:255|unique:users,email,' . Auth::id(),
             'old_password' => 'required_with:new_password|current_password',
             'new_password' => 'nullable|min:8|confirmed', // Ensures new password matches the confirmation
-            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:1024',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg',
         ], [
             'old_password.current_password' => 'The old password is incorrect.',
             'new_password.confirmed' => 'The new password and confirmation password do not match.',
@@ -56,7 +56,6 @@ class ProfileController extends Controller
 
         // Update the name and email
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
 
         // Update password if new password is provided
         if ($request->filled('new_password')) {
@@ -68,6 +67,8 @@ class ProfileController extends Controller
             $imagePath = $request->file('image')->store('profile_images', 'public');
             $user->image = $imagePath;
         }
+
+        // dd($user);
 
         $user->save();
 

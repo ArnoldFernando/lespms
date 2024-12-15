@@ -1,5 +1,4 @@
 <x-serv-provider-layout>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (session('success'))
         <script>
@@ -29,7 +28,7 @@
             <p><strong>Name:</strong> {{ $user->name }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>
             @if ($user->image)
-                <img src="{{ Storage::url($user->image) }}" alt="Profile Image" class="w-32 h-32 rounded-full">
+                <img src="{{ Storage::url($user->image) }}" alt="Profile Image" width="200px">
             @else
                 <p>No profile image</p>
             @endif

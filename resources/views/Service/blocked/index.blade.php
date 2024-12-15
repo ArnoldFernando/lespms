@@ -36,9 +36,10 @@
                         </td>
                         <td>
                             @if ($booking->user->is_blocked)
-                                <form action="{{ route('service.user.unblock', $booking->user->id) }}" method="POST">
+                                <form action="{{ route('service-provider.user.unblock', $booking->user->id) }}"
+                                    method="POST">
                                     @csrf
-                                    @method('PATCH')
+
                                     <button type="submit" class="btn btn-sm btn-success">
                                         Unblock
                                     </button>

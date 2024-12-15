@@ -46,7 +46,7 @@
                 @else
                     <!-- Display default image if no images are available -->
                     <div class="col-md-4 mb-3">
-                        <img src="{{ asset('assets/img/logo2.jpg') }}" alt="Default Image" class="img-fluid rounded-1"
+                        <img src="{{ asset('assets/img/default.png') }}" alt="Default Image" class="img-fluid rounded-1"
                             style="width: 100%; height: 200px; object-fit: cover;">
                     </div>
                 @endif

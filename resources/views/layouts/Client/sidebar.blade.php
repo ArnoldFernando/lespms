@@ -17,12 +17,12 @@
          Home
      </div>
 
-     <!-- Nav Item - Dashboard -->
+     {{--  <!-- Nav Item - Dashboard -->
      <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
          <a class="nav-link" href="{{ route('home') }}">
              <i class="fa-solid fa-house"></i>
              <span>Dashboard</span></a>
-     </li>
+     </li>  --}}
 
      <!-- Divider -->
      <hr class="sidebar-divider">
