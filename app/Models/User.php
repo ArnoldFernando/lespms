@@ -21,6 +21,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = [
         'name',
         'email',
@@ -28,6 +30,7 @@ class User extends Authenticatable
         'usertype',
         'is_blocked',
         'image',
+        'files',
     ];
 
     /**
@@ -47,6 +50,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+
+        'files' => 'array',
     ];
 
     public function profile(): HasOne

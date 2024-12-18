@@ -17,15 +17,15 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.users.index', compact('users'));
     }
-    
+
     public function show(string $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
-        if (!$user) {
-            return redirect()->route('users.index')->with('error', 'User not found');
-        }    
+        // if (!$user) {
+        //     return redirect()->route('users.index')->with('error', 'User not found');
+        // }
 
-        return view('admin.users.show', ['user' => $user]);
+        return view('admin.users.show', compact('user'));
     }
 }

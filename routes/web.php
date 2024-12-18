@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Auth\RegisterServiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Resources\UserController;
@@ -38,8 +39,12 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'redirectUserBasedOnRole'])->middleware('auth')->name('home');
 
-// admin routes
 
+// register routes
+Route::view('register-service-provider', 'Auth.register-service')->name('register-service');
+Route::post('/register-service-as-provider', [RegisterServiceController::class, 'store'])->name('register-service-as-provider');
+
+// admin routes
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'admin'])

@@ -41,14 +41,16 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form method="POST" action="{{ route('register') }}" class="user">
+                            <form method="POST" action="{{ route('register-service-as-provider') }}" class="user"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text"
                                             class="form-control form-control-user @error('name') is-invalid @enderror"
-                                            id="name" name="name" placeholder="First Name">
-                                        @error('name')
+                                            id="first-name" name="name" placeholder="First Name"
+                                            value="{{ old('first_name') }}">
+                                        @error('first_name')
                                             <div class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
                                             </div>
@@ -56,10 +58,10 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text"
-                                            class="form-control form-control-user @error('name') is-invalid @enderror"
-                                            id="name" placeholder="Last Name" name="name" required
-                                            autocomplete="name" autofocus>
-                                        @error('name')
+                                            class="form-control form-control-user @error('last_name') is-invalid @enderror"
+                                            id="last-name" name="name" placeholder="Last Name"
+                                            value="{{ old('last_name') }}" required>
+                                        @error('last_name')
                                             <div class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
                                             </div>
@@ -69,7 +71,7 @@
                                 <div class="form-group">
                                     <input type="email" name="email"
                                         class="form-control form-control-user @error('email') is-invalid @enderror"
-                                        id="email" placeholder="Email Address" required autocomplete="email">
+                                        id="email" placeholder="Email Address" value="{{ old('email') }}" required>
                                     @error('email')
                                         <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -80,7 +82,7 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" name="password"
                                             class="form-control form-control-user @error('password') is-invalid @enderror"
-                                            id="password" placeholder="Password" required autocomplete="new-password">
+                                            id="password" placeholder="Password" required>
                                         @error('password')
                                             <div class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
@@ -90,16 +92,40 @@
                                     <div class="col-sm-6">
                                         <input type="password" name="password_confirmation"
                                             class="form-control form-control-user" id="password-confirm"
-                                            placeholder="Repeat Password" required autocomplete="new-password">
+                                            placeholder="Repeat Password" required>
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="image">Profile Image (optional)</label>
+                                    <input type="file" name="image"
+                                        class="form-control form-control-user @error('image') is-invalid @enderror"
+                                        id="image">
+                                    @error('image')
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="files">Upload Permit</label>
+                                    <input type="file" name="files[]"
+                                        class="form-control form-control-user @error('files.*') is-invalid @enderror"
+                                        id="files" multiple required>
+                                    @error('files.*')
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
+                                </div>
 
 
-
-                                <button type="submit" class="btn btn-primary btn-user btn-block">Register
-                                    Account</button>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Register Account
+                                </button>
                             </form>
+
 
                             <hr>
                             <div class="text-center">
@@ -107,10 +133,6 @@
                             </div>
                             <div class="text-center">
                                 <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="{{ route('register-service') }}">Create an Account as Service
-                                    Provider!</a>
                             </div>
                         </div>
                     </div>
