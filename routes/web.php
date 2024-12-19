@@ -31,7 +31,6 @@ use App\Livewire\Chat;
 */
 
 Route::get('/', function () {
-    // TODO: make welcome page content have the data from the database
     return view('welcome');
 });
 
@@ -51,6 +50,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'getData'])
             ->name('dashboard');
+        Route::get('users/verify/{user}', [UserController::class, 'verifyUser'])->name('users.verify');
         Route::resource('users', UserController::class);
     });
 
@@ -61,7 +61,7 @@ Route::prefix('service-provider')
     ->middleware(['auth', 'service.provider'])
     ->group(function () {
         Route::get('dashboard', [ServiceProviderDashboardController::class, 'index'])->name('dashboard');
-        Route::resource('services', EventServiceController::class);
+        Route::resource('services', EventServiceController::class)->middleware('verified.provider');
         Route::get('notifications/recent', [NotificationController::class, 'getRecentNotifications'])->name('notifications.getNotifications');
         Route::resource('notifications', NotificationController::class);
         Route::get('/my-services/bookings', [EventServiceController::class, 'showBookings'])->name('event-services.bookings');
@@ -75,6 +75,9 @@ Route::prefix('service-provider')
         Route::post('/block-user/{user}', [BlockuserController::class, 'blockUser'])->name('user.block');
         Route::post('/unblock-user/{user}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
         Route::get('/chat/{receiverId}', Chat::class)->name('chat');
+        Route::get('verification/notice', function () {
+            return view('Service.verification.notice');
+        })->name('verification.notice');
     });
 
 // client routes
