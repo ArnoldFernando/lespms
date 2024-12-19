@@ -28,4 +28,12 @@ class UserController extends Controller
 
         return view('admin.users.show', compact('user'));
     }
+
+    public function verifyUser(User $user)
+    {
+        $user->verified = true;
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'User verified successfully');
+    }
 }
