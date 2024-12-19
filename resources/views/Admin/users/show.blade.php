@@ -64,6 +64,31 @@
                 @endif
             </div>
         </div>
+
+        @if ($user->usertype == 'service_provider')
+            @if ($user->verified)
+                <div class="alert alert-success mt-3" role="alert">
+                    This Event Provider is verified.
+                </div>
+            @else
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Verify Service Provider</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.users.verify', $user) }}">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-primary">Verify</button>
+                        </form>
+                    </div>
+                </div>
+            @endif
+        @endif
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Back</a>
+
+
+
     </div>
 
 
