@@ -27,9 +27,9 @@
         <div class="container-fluid">
             <form action="{{ route('service-provider.services.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST') <!-- Use PUT for updates -->
+                @method('POST')
                 @if (isset($eventService))
-                    @method('PUT') <!-- Use PUT for updates -->
+                    @method('PUT')
                 @endif
 
                 <div class="form-group">
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="rate">Rate</label>
+                            <label for="rate">Rate per hour (Peso)</label>
                             <input type="number" name="rate" id="rate" class="form-control"
                                 value="{{ isset($eventService) ? $eventService->rate : old('rate') }}" required>
                         </div>
@@ -58,52 +58,57 @@
                                     {{ isset($eventService) && $eventService->status == 'available' ? 'selected' : '' }}>
                                     Available
                                 </option>
-                                <option value="in-progress"
-                                    {{ isset($eventService) && $eventService->status == 'in-progress' ? 'selected' : '' }}>
-                                    In
-                                    Progress</option>
-                                <option value="completed"
-                                    {{ isset($eventService) && $eventService->status == 'completed' ? 'selected' : '' }}>
-                                    Completed
-                                </option>
-                                <option value="canceled"
-                                    {{ isset($eventService) && $eventService->status == 'canceled' ? 'selected' : '' }}>
-                                    Canceled
+                                <option value="unavailable"
+                                    {{ isset($eventService) && $eventService->status == 'unavailable' ? 'selected' : '' }}>
+                                    Unavailable
                                 </option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="scheduled_date">Scheduled Date</label>
-                            <input type="date" name="scheduled_date" id="scheduled_date" class="form-control"
-                                value="{{ isset($eventService) ? $eventService->scheduled_date : old('scheduled_date') }}">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label for="available_until">Available Until</label>
-                            <input type="date" name="available_until" id="available_until" class="form-control"
-                                value="{{ isset($eventService) ? $eventService->available_until : old('available_until') }}">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-6">
+
+                    <div class="col-3">
                         <div class="form-group">
                             <label for="assigned_to">Assigned To</label>
                             <input type="text" name="assigned_to" id="assigned_to" class="form-control"
                                 value="{{ isset($eventService) ? $eventService->assigned_to : old('assigned_to') }}">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" name="location" id="location" class="form-control"
-                                value="{{ isset($eventService) ? $eventService->location : old('location') }}">
+                            <label for="location">Barangay</label>
+                            <select name="location" id="location" class="form-control">
+                                <option value="">Select a Barangay</option> <!-- Default option -->
+                            </select>
                         </div>
                     </div>
+
+                    <script>
+                        // Static list of Barangays in Buguey, Cagayan
+                        const barangays = [
+                            "Ballang", "Balza", "Cabaritan", "Calamegatan", "Centro (Poblacion)", "Centro West",
+                            "Dalaya", "Fula", "Leron", "M. Antiporda", "Maddalero", "Mala Este", "Mala Weste",
+                            "Minanga Este", "Paddaya Este", "Pattao", "Quinawegan", "Remebella", "San Isidro",
+                            "Santa Isabel", "Santa Maria", "Tabbac", "Villa Cielo", "Alucao Weste (San Lorenzo)",
+                            "Minanga Weste", "Paddaya Weste", "San Juan", "San Vicente", "Villa Gracia", "Villa Leonora"
+                        ];
+
+                        // Function to populate the dropdown with Barangays
+                        function populateBarangays() {
+                            const locationDropdown = document.getElementById('location');
+
+                            barangays.forEach(function(barangay) {
+                                const option = document.createElement('option');
+                                option.value = barangay; // Use the barangay name as the value
+                                option.textContent = barangay; // Use the barangay name as the display text
+                                locationDropdown.appendChild(option);
+                            });
+                        }
+
+                        // Call the function to populate the dropdown on page load
+                        document.addEventListener('DOMContentLoaded', populateBarangays);
+                    </script>
+
                 </div>
 
                 <div class="form-group">
