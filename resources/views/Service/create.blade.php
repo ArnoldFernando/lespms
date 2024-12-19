@@ -1,6 +1,5 @@
 <x-serv-provider-layout>
     <div class="container-fluid">
-
         @if (session('success'))
             <script>
                 Swal.fire({
@@ -11,7 +10,6 @@
                 });
             </script>
         @endif
-
         @if (session('error'))
             <script>
                 Swal.fire({
@@ -22,21 +20,14 @@
                 });
             </script>
         @endif
-
-
-        <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h5 class="h5 mb-0 text-black">Add Event</h5>
-            {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
         </div>
-
         <hr class="mt-0">
-
-        {{-- Put the code here --}}
         <div class="container-fluid">
             <form action="{{ route('service-provider.services.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('POST') <!-- Use PUT for updates -->
                 @if (isset($eventService))
                     @method('PUT') <!-- Use PUT for updates -->
                 @endif
