@@ -76,8 +76,7 @@
                               <div>
                                   <div @if (!$notification->read) style="background-color: white;" @endif
                                       class="small text-gray-900">
-                                      {{-- comment for testing because null --}}
-                                      {{ $notification->bookedBy->name }}
+                                      {{ $notification->bookedBy->name ?? 'No name' }}
 
                                       {{--  notif name  --}}
                                   </div>
