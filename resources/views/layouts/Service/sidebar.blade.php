@@ -50,6 +50,25 @@
          </div>
      </li>
 
+     <li class="nav-item {{ request()->routeIs('service-provider.event-services.bookings') ? 'active' : '' }}">
+         <a class="nav-link" href="{{ route('service-provider.event-services.bookings') }}">
+             <i class="fa-solid fa-book"></i>
+             <span>Booked List</span></a>
+     </li>
+
+
+     <li class="nav-item {{ request()->routeIs('service-provider.confirmed.bookings') ? 'active' : '' }}">
+         <a class="nav-link" href="{{ route('service-provider.confirmed.bookings') }}">
+             <i class="fa-solid fa-check"></i>
+             <span>Confirmed</span></a>
+     </li>
+
+
+     <li class="nav-item {{ request()->routeIs('service-provider.canceled.bookings') ? 'active' : '' }}">
+         <a class="nav-link" href="{{ route('service-provider.canceled.bookings') }}">
+             <i class="fa-solid fa-ban"></i>
+             <span>Cancelled</span></a>
+     </li>
      <!-- Divider -->
      <hr class="sidebar-divider">
 
