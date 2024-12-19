@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'client' => \App\Http\Middleware\ClientMiddleware::class,
         'service.provider' => \App\Http\Middleware\ServiceProviderMiddleware::class,
         'check.blocked' => \App\Http\Middleware\CheckIfBlocked::class,
+        'verified.provider' => \App\Http\Middleware\VerifiedProvider::class,
     ];
 }
