@@ -19,8 +19,6 @@ class EventService extends Model
         'description',
         'rate',
         'status',
-        'scheduled_date',
-        'available_until',
         'assigned_to',
         'location',
         'special_requests',

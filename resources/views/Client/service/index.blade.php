@@ -23,6 +23,27 @@
             </script>
         @endif
 
+        <style>
+            .unavailable-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                /* Semi-transparent background */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                font-size: 2rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                z-index: 10;
+            }
+        </style>
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
             <h5 class="h5 mb-0 text-black">Event List</h5>
@@ -40,7 +61,15 @@
                 <div class="row">
                     @foreach ($services as $service)
                         <div class="col-md-4 mb-4">
-                            <div class="card shadow-sm border-light rounded">
+                            <div class="card shadow-sm border-light rounded position-relative"
+                                @if ($service->status == 'unavailable') style="opacity: 0.5; pointer-events: none;" @endif>
+                                @if ($service->status == 'unavailable')
+                                    <!-- Unavailable Overlay Text -->
+                                    <div class="unavailable-overlay">
+                                        <span>UNAVAILABLE</span>
+                                    </div>
+                                @endif
+
                                 <div class="card-header p-0">
                                     @if ($service && !empty($service->image) && is_array($service->image))
                                         <img src="{{ asset(str_replace('public/', 'storage/', $service->image[0])) }}"
@@ -61,20 +90,22 @@
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <!-- View Details Button -->
                                     <a href="{{ route('client.service.show', $service->id) }}"
-                                        class="btn btn-info btn-sm">
+                                        class="btn btn-info btn-sm" @if ($service->status == 'unavailable') disabled @endif>
                                         <i class="fas fa-eye"></i> View Details
                                     </a>
 
                                     <!-- Book Service Button -->
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#bookingModal-{{ $service->id }}">
+                                        data-target="#bookingModal-{{ $service->id }}"
+                                        @if ($service->status == 'unavailable') disabled @endif>
                                         <i class="fas fa-calendar-check"></i> Book Service
                                     </button>
                                 </div>
 
                                 <!-- Chat with Service Provider -->
                                 <a href="{{ route('client.chat', ['receiverId' => $service->service_provider_id]) }}"
-                                    class="btn btn-success btn-sm d-block mt-2 text-center">
+                                    class="btn btn-success btn-sm d-block mt-2 text-center"
+                                    @if ($service->status == 'unavailable') disabled @endif>
                                     <i class="fas fa-comment-alt"></i> Chat with Service Provider
                                 </a>
 
@@ -102,19 +133,23 @@
                                                         <label for="booking_date-{{ $service->id }}">Select Booking
                                                             Date:</label>
                                                         <input type="date" id="booking_date-{{ $service->id }}"
-                                                            name="booking_date" class="form-control" required>
+                                                            name="booking_date" class="form-control" required
+                                                            @if ($service->status == 'unavailable') disabled @endif>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="notes-{{ $service->id }}">Additional
                                                             Notes:</label>
-                                                        <textarea id="notes-{{ $service->id }}" name="notes" class="form-control" placeholder="Any special requests"></textarea>
+                                                        <textarea id="notes-{{ $service->id }}" name="notes" class="form-control" placeholder="Any special requests"
+                                                            @if ($service->status == 'unavailable') disabled @endif></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Book Service</button>
+                                                    <button type="submit" class="btn btn-primary"
+                                                        @if ($service->status == 'unavailable') disabled @endif>Book Service
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
@@ -126,6 +161,8 @@
                 </div>
             @endif
         </div>
+
+
 
 
 
