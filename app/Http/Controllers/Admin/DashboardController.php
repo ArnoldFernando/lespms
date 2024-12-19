@@ -19,11 +19,6 @@ class DashboardController extends Controller
         $serviceProviderCount = User::where('usertype', 'service_provider')->count();
         $adminCount = User::where('usertype', 'admin')->count();
 
-        $bookingsCount = Booking::count();
-        $confirmedBookings = Booking::where('status', 'confirmed')->count();
-        $pendingBookings = Booking::where('status', 'pending')->count();
-        $canceledBookings = Booking::where('status', 'canceled')->count();
-
         $eventServicesCount = EventService::count();
         $activeServices = EventService::where('status', 'active')->count();
         $inactiveServices = EventService::where('status', 'inactive')->count();
@@ -50,10 +45,6 @@ class DashboardController extends Controller
             'clientUserCount' => $clientUserCount,
             'serviceProviderCount' => $serviceProviderCount,
             'adminCount' => $adminCount,
-            'bookingsCount' => $bookingsCount,
-            'confirmedBookings' => $confirmedBookings,
-            'pendingBookings' => $pendingBookings,
-            'canceledBookings' => $canceledBookings,
             'eventServicesCount' => $eventServicesCount,
             'activeServices' => $activeServices,
             'inactiveServices' => $inactiveServices,

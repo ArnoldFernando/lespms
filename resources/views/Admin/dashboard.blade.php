@@ -3,21 +3,18 @@
         <h1 class="text-center mb-4">Admin Dashboard</h1>
 
         <!-- First Row (Charts 1 and 2) -->
-        <div class="row mb-4">
+        <div class="row mb-4 justify-content-center">
             <div class="col-12 col-lg-4">
                 <canvas id="userDistributionChart"></canvas>
             </div>
-            <div class="col-12 col-lg-8">
-                <canvas id="bookingStatusChart"></canvas>
+            <div class="col-12 col-lg-4">
+                <canvas id="eventServiceChart"></canvas>
             </div>
         </div>
 
         <!-- Second Row (Charts 3 and 4) -->
         <div class="row mb-4">
-            <div class="col-12 col-lg-4">
-                <canvas id="eventServiceChart"></canvas>
-            </div>
-            <div class="col-12 col-lg-8">
+            <div class="col-12">
                 <canvas id="monthlyBookingsChart"></canvas>
             </div>
         </div>
@@ -50,41 +47,6 @@
                     title: {
                         display: true,
                         text: 'User Distribution'
-                    }
-                }
-            }
-        });
-
-        // Booking Status
-        const bookingStatusCtx = document.getElementById('bookingStatusChart').getContext('2d');
-        new Chart(bookingStatusCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Confirmed', 'Pending', 'Canceled'],
-                datasets: [{
-                    label: 'Booking Status',
-                    data: [
-                        {{ $confirmedBookings }},
-                        {{ $pendingBookings }},
-                        {{ $canceledBookings }}
-                    ],
-                    backgroundColor: ['#4caf50', '#ff9800', '#f44336']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Booking Status'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
                     }
                 }
             }
