@@ -21,22 +21,21 @@ class BookingController extends Controller
             }, 'user' => function ($query) {
                 $query->select('id', 'is_blocked');
             }]);
+        $query->orderBy('booking_date');
 
         $allowedStatuses = ['pending', 'confirmed', 'canceled', 'completed'];  // Define the allowed statuses
 
-         // Check if the request has a valid status and filter based on the allowed statuses
-        if ($request->has('status') && in_array($request->input('status'), $allowedStatuses)) {
-            $query->where('status', $request->input('status'));
-        } else {
-            // Redirect back with an error message if the status is invalid
-            return redirect()->route('service-provider.bookings.index', ['status' => 'pending'])
-                            ->with('error', 'Invalid status. Allowed statuses are: pending, confirmed, or canceled.');
-        }
-
-        $query->orderBy('booking_date');
-        $bookings = $query->get();
-
         if (auth()->user()->usertype === "service_provider") {
+         // Check if the request has a valid status and filter based on the allowed statuses
+            if ($request->has('status') && in_array($request->input('status'), $allowedStatuses)) {
+                $query->where('status', $request->input('status'));
+            } else {
+                // Redirect back with an error message if the status is invalid
+                return redirect()->route('service-provider.bookings.index', ['status' => 'pending'])
+                                ->with('error', 'Invalid status. Allowed statuses are: pending, confirmed, or canceled.');
+            }
+
+            $bookings = $query->get();
             $nonBlockedBookings = $bookings->where('user.is_blocked', false);
             $blockedBookings = $bookings->where('user.is_blocked', true);
 
@@ -44,6 +43,8 @@ class BookingController extends Controller
         }
 
         if (auth()->user()->usertype === "user") {
+            $bookings = $query->get();
+
             return view('Client.booking.index', compact('bookings'));
         }
 
