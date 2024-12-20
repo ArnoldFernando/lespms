@@ -64,11 +64,7 @@ Route::prefix('service-provider')
         Route::resource('services', EventServiceController::class)->middleware('verified.provider');
         Route::get('notifications/recent', [NotificationController::class, 'getRecentNotifications'])->name('notifications.getNotifications');
         Route::resource('notifications', NotificationController::class);
-        Route::get('/my-services/bookings', [EventServiceController::class, 'showBookings'])->name('event-services.bookings');
-        Route::get('/my-confirmed/bookings', [EventServiceController::class, 'showConfirmedBookings'])->name('confirmed.bookings');
-        Route::get('/my-canceled/bookings', [EventServiceController::class, 'showCanceledBookings'])->name('canceled.bookings');
-        Route::post('/my-services/bookings/{bookingId}/{status}', [EventServiceController::class, 'updateStatus'])->name('event-services.updateStatus');
-        Route::post('/my-confirmed/bookings/{bookingId}/{status}', [EventServiceController::class, 'updateConfirmedStatus'])->name('confirmed.updateStatus');
+        Route::resource('bookings', BookingController::class);
         Route::get('/booked-users', [BlockuserController::class, 'index'])->name('booked.users');
         Route::post('/block-user/{user}/service', [BlockuserController::class, 'blockUserFromServices'])->name('user.block.service');
         Route::post('/user/unblock/{userId}', [BlockuserController::class, 'unblockUser'])->name('user.unblock');
