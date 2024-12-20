@@ -50,7 +50,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'getData'])
             ->name('dashboard');
-        Route::get('users/verify/{user}', [UserController::class, 'verifyUser'])->name('users.verify');
+        Route::patch('users/verify/{user}', [UserController::class, 'verify'])->name('users.verify');
         Route::resource('users', UserController::class);
     });
 
