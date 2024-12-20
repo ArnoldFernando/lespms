@@ -49,25 +49,27 @@
              </div>
          </div>
      </li>
-
-     <li class="nav-item {{ request()->routeIs('service-provider.event-services.bookings') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('service-provider.event-services.bookings') }}">
-             <i class="fa-solid fa-book"></i>
-             <span>Booked List</span></a>
-     </li>
-
-
-     <li class="nav-item {{ request()->routeIs('service-provider.confirmed.bookings') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('service-provider.confirmed.bookings') }}">
-             <i class="fa-solid fa-check"></i>
-             <span>Confirmed</span></a>
-     </li>
-
-
-     <li class="nav-item {{ request()->routeIs('service-provider.canceled.bookings') ? 'active' : '' }}">
-         <a class="nav-link" href="{{ route('service-provider.canceled.bookings') }}">
-             <i class="fa-solid fa-ban"></i>
-             <span>Cancelled</span></a>
+     {{-- bookings management --}}
+     <li class="nav-item">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookings"
+             aria-expanded="true" aria-controls="bookings">
+             <i class="fas fa-fw fa-cog"></i>
+             <span>Bookings</span>
+         </a>
+         <div id="bookings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+             <div class="bg-white py-2 collapse-inner rounded">
+                 @if (Auth::user()->verified)
+                     <a class="collapse-item"
+                         href="{{ route('service-provider.bookings.index', ['status' => 'pending']) }}">Pending</a>
+                     <a class="collapse-item"
+                         href="{{ route('service-provider.bookings.index', ['status' => 'confirmed']) }}">Confirmed</a>
+                     <a class="collapse-item"
+                         href="{{ route('service-provider.bookings.index', ['status' => 'canceled']) }}">Canceled</a>
+                 @else
+                     <p class="text-warning text-center">Wait for your account to be verified</p>
+                 @endif
+             </div>
+         </div>
      </li>
      <!-- Divider -->
      <hr class="sidebar-divider">
