@@ -76,13 +76,26 @@
                         <h5>Verify Service Provider</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.users.verify', $user) }}">
+                        <form action="{{ route('admin.users.verify', $user) }}" method="POST">
                             @csrf
-                            @method('PUT')
+                            @method('PATCH')
+
+                            <div class="form-group">
+                                <label for="admin_password">Enter Admin Password</label>
+                                <input type="password" id="admin_password" name="admin_password" class="form-control"
+                                    required>
+                            </div>
+
+                            @if ($errors->has('admin_password'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('admin_password') }}
+                                </div>
+                            @endif
+
                             <button type="submit" class="btn btn-primary">Verify</button>
                         </form>
                     </div>
-                </div>
+
             @endif
         @endif
         <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Back</a>
