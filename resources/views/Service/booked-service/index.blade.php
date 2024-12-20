@@ -72,11 +72,12 @@
                                 <!-- Confirm / Cancel Buttons for Pending Status -->
                                 @if ($booking->status == 'pending')
                                     <div>
-                                        <form
-                                            action="{{ route('service-provider.event-services.updateStatus', ['bookingId' => $booking->id, 'status' => 'confirmed']) }}"
+                                        <form action="{{ route('service-provider.bookings.update', $booking->id) }}"
                                             method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="btn btn-success btn-sm">Confirm</button>
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="confirmed">
+                                            <button type="submit" class="btn btn-success btn-sm">asdf</button>
                                         </form>
 
                                         <!-- Cancel Button to Trigger Modal -->
@@ -105,9 +106,11 @@
                                                             data-bs-dismiss="modal">Cancel</button>
                                                         <!-- Cancel Form Inside Modal -->
                                                         <form
-                                                            action="{{ route('service-provider.event-services.updateStatus', ['bookingId' => $booking->id, 'status' => 'canceled']) }}"
+                                                            action="{{ route('service-provider.bookings.update', $booking->id) }}"
                                                             method="POST" class="d-inline" id="cancelEventForm">
                                                             @csrf
+                                                            @method('PATCH')
+                                                            <input type="hidden" name="status" value="canceled">
                                                             <button type="submit" class="btn btn-danger">Confirm
                                                                 Cancel</button>
                                                         </form>
@@ -125,7 +128,6 @@
                                     data-bs-target="#confirmBlockUserModal">
                                     <i class="fa-solid fa-ban me-1"></i>Block
                                 </button>
-
                                 <!-- Confirmation Modal for Blocking User -->
                                 <div class="modal fade" id="confirmBlockUserModal" tabindex="-1"
                                     aria-labelledby="confirmBlockUserModalLabel" aria-hidden="true">
@@ -149,15 +151,14 @@
                                                     action="{{ route('service-provider.user.block.service', $booking->user->id) }}"
                                                     class="ms-3" id="blockUserForm">
                                                     @csrf
+                                                    @method('PATCH')
                                                     <button type="submit" class="btn btn-danger">Confirm Block</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                             <!-- Chat Button -->
                             <a href="{{ route('service-provider.chat', ['receiverId' => $booking->user->id]) }}"
                                 class="btn btn-info mt-2 w-100"><i class="fa-regular fa-comments me-1"></i>
@@ -179,10 +180,6 @@
             }
         </script>
 
-
-
-
-
         <!-- Blocked users -->
         <h3 class="mt-5">Blocked Users</h3>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -193,8 +190,8 @@
                             <img src="{{ asset(str_replace('public/', 'storage/', $booking->eventService->image[0])) }}"
                                 alt="Event Image" class="card-img-top" style="height: 200px; object-fit: cover;">
                         @else
-                            <img src="{{ asset('assets/img/default.png') }}" alt="Default Image" class="card-img-top"
-                                style="height: 200px; object-fit: cover;">
+                            <img src="{{ asset('assets/img/default.png') }}" alt="Default Image"
+                                class="card-img-top" style="height: 200px; object-fit: cover;">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $booking->user->name }}</h5>
