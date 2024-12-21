@@ -21,12 +21,15 @@ class ServiceController extends Controller
         if (auth()->check() && auth()->user()->is_blocked) {
             $services = collect();  // No services shown to blocked user
         } else {
-            $services = EventService::with('user')->get();
+            $services = EventService::with('users')
+                ->whereHas('users', function ($query) {
+                    $query->where('verified', true);
+                })
+                ->get();
         }
 
         return view('client.service.index', compact('services'));
     }
-
 
     /**
      * Show the form for creating a new resource.
