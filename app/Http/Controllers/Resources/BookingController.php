@@ -43,7 +43,7 @@ class BookingController extends Controller
         }
 
         if (auth()->user()->usertype === "user") {
-            $bookings = $query->get();
+            $bookings = $query->with('eventService')->get();
 
             return view('Client.booking.index', compact('bookings'));
         }
