@@ -81,7 +81,7 @@
                                     @endif
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">{{ $service->title }}</h5>
+                                    <h5 class="card-title text-center fw-bold">{{ $service->title }}</h5>
                                     <p class="card-text"><strong>Description:</strong>
                                         {{ Str::limit($service->description, 20) }}</p>
                                     <p class="card-text"><strong>Location:</strong>
@@ -104,7 +104,7 @@
 
                                 <!-- Chat with Service Provider -->
                                 <a href="{{ route('client.chat', ['receiverId' => $service->service_provider_id]) }}"
-                                    class="btn btn-success btn-sm d-block mt-2 text-center"
+                                    class="btn btn-success btn-sm d-block mt-1 mb-2 mx-2 text-center"
                                     @if ($service->status == 'unavailable') disabled @endif>
                                     <i class="fas fa-comment-alt"></i> Chat with Service Provider
                                 </a>
@@ -159,6 +159,15 @@
                         </div>
                     @endforeach
                 </div>
+                <!-- Pagination Links -->
+                <div class="row mt-4">
+                    <div class="col-12 d-flex justify-content-center">
+                        <nav>
+                            {{ $services->links('pagination::bootstrap-4') }}
+                        </nav>
+                    </div>
+                </div>
+
             @endif
         </div>
 

@@ -25,7 +25,7 @@ class ServiceController extends Controller
                 ->whereHas('users', function ($query) {
                     $query->where('verified', true);
                 })
-                ->get();
+                ->paginate(6);
         }
 
         return view('client.service.index', compact('services'));

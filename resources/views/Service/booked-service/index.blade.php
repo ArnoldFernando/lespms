@@ -77,37 +77,41 @@
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="confirmed">
-                                            <button type="submit" class="btn btn-success btn-sm">asdf</button>
+                                            <button type="submit" class="btn btn-success btn-sm">Confirm</button>
                                         </form>
 
                                         <!-- Cancel Button to Trigger Modal -->
                                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#confirmCancelModal">
+                                            data-bs-target="#confirmCancelModal{{ $booking->id }}">
                                             Cancel
                                         </button>
 
                                         <!-- Confirmation Modal for Canceling -->
-                                        <div class="modal fade" id="confirmCancelModal" tabindex="-1"
-                                            aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="confirmCancelModal{{ $booking->id }}"
+                                            tabindex="-1" aria-labelledby="confirmCancelModalLabel{{ $booking->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="confirmCancelModalLabel">Confirm
-                                                            Cancelation</h5>
+                                                        <h5 class="modal-title"
+                                                            id="confirmCancelModalLabel{{ $booking->id }}">
+                                                            Confirm Cancelation
+                                                        </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         Are you sure you want to cancel this event? This action cannot
-                                                        be undone.
+                                                        be
+                                                        undone.
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cancel</button>
+                                                            data-bs-dismiss="modal">Close</button>
                                                         <!-- Cancel Form Inside Modal -->
                                                         <form
                                                             action="{{ route('service-provider.bookings.update', $booking->id) }}"
-                                                            method="POST" class="d-inline" id="cancelEventForm">
+                                                            method="POST" class="d-inline">
                                                             @csrf
                                                             @method('PATCH')
                                                             <input type="hidden" name="status" value="canceled">
@@ -118,57 +122,77 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 @endif
 
                                 <!-- Block User Button -->
-                                <!-- Block User Button to Trigger Modal -->
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#confirmBlockUserModal">
-                                    <i class="fa-solid fa-ban me-1"></i>Block
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#blockUserModal{{ $booking->id }}">
+                                    <i class="fa-solid fa-ban me-1"></i> Block
                                 </button>
-                                <!-- Confirmation Modal for Blocking User -->
-                                <div class="modal fade" id="confirmBlockUserModal" tabindex="-1"
-                                    aria-labelledby="confirmBlockUserModalLabel" aria-hidden="true">
+
+                                <!-- Block User Modal -->
+                                <div class="modal fade" id="blockUserModal{{ $booking->id }}" tabindex="-1"
+                                    aria-labelledby="blockUserModalLabel{{ $booking->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="confirmBlockUserModalLabel">Confirm Block
-                                                    User</h5>
+                                                <h5 class="modal-title" id="blockUserModalLabel{{ $booking->id }}">
+                                                    Block User
+                                                </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Are you sure you want to block this user? They will not be able to use
+                                                Are you sure you want to block this user? They will no longer be able to
+                                                book
                                                 your services.
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancel</button>
-                                                <!-- Block User Form in Modal -->
-                                                <form method="POST"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <!-- Block Form -->
+                                                <form
                                                     action="{{ route('service-provider.user.block.service', $booking->user->id) }}"
-                                                    class="ms-3" id="blockUserForm">
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="btn btn-danger">Confirm Block</button>
+                                                    <button type="submit" class="btn btn-danger">Block User</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Chat Button -->
                             <a href="{{ route('service-provider.chat', ['receiverId' => $booking->user->id]) }}"
-                                class="btn btn-info mt-2 w-100"><i class="fa-regular fa-comments me-1"></i>
-                                Chat with User
+                                class="btn btn-info mt-2 w-100">
+                                <i class="fa-regular fa-comments me-1"></i> Chat with User
                             </a>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+
+        <!-- Pagination Links -->
+        <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center">
+                <nav>
+                    {{ $nonBlockedBookings->links('pagination::bootstrap-4') }}
+                </nav>
+            </div>
+        </div>
+
+
+
+
+        {{-- <!-- Pagination Links -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $nonBlockedBookings->links() }}
+        </div> --}}
+
 
         <script>
             function confirmBlockUser(event) {
@@ -210,6 +234,15 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        <!-- Pagination Links -->
+        <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center">
+                <nav>
+                    {{ $blockedBookings->links('pagination::bootstrap-4') }}
+                </nav>
+            </div>
         </div>
     </div>
 </x-serv-provider-layout>
