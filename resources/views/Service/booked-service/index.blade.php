@@ -185,15 +185,6 @@
             </div>
         </div>
 
-
-
-
-        {{-- <!-- Pagination Links -->
-        <div class="d-flex justify-content-center mt-4">
-            {{ $nonBlockedBookings->links() }}
-        </div> --}}
-
-
         <script>
             function confirmBlockUser(event) {
                 const confirmation = confirm("Are you sure you want to block this user?");
