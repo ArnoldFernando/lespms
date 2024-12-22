@@ -38,12 +38,12 @@ class BookingController extends Controller
             // Paginate non-blocked bookings
             $nonBlockedBookings = $query->clone()->whereHas('user', function ($query) {
                 $query->where('is_blocked', false);
-            })->paginate(6);
+            })->paginate(8)->appends(['status' => $request->input('status')]);
 
             // Paginate blocked bookings
             $blockedBookings = $query->clone()->whereHas('user', function ($query) {
                 $query->where('is_blocked', true);
-            })->paginate(6);
+            })->paginate(8)->appends(['status' => $request->input('status')]);
 
             return view('Service.booked-service.index', compact('nonBlockedBookings', 'blockedBookings'));
         }
