@@ -35,6 +35,13 @@
          <a class="nav-link" href="{{ route('client.service.index') }}">
              <i class="fa-solid fa-calendar-days"></i>
              <span>Event List</span></a>
+
+     </li>
+     <li class="nav-item {{ request()->routeIs('client.bookings.complete') ? 'active' : '' }}">
+
+         <a class="nav-link" href="{{ route('client.bookings.complete') }}">
+             <i class="fa-solid fa-calendar-days"></i>
+             <span>Completed</span></a>
      </li>
      <hr class="sidebar-divider my-0 mb-3">
 

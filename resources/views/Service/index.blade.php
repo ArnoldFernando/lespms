@@ -66,6 +66,29 @@
                                 <div class="card-body">
                                     <p class="card-text"><strong>Description:</strong> {{ $service->title }}</p>
                                     <p class="card-text"><strong>Location:</strong> {{ $service->location }}</p>
+
+                                    <div class="star-rating">
+                                        @php
+                                            $averageRating = $service->ratingsAndFeedback->avg('rating');
+                                            $ratingCount = $service->ratingsAndFeedback->count();
+                                        @endphp
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= floor($averageRating))
+                                                <span class="fa fa-star checked"></span>
+                                            @elseif ($i == ceil($averageRating) && $averageRating - floor($averageRating) >= 0.5)
+                                                <span class="fa fa-star-half-alt checked"></span>
+                                            @else
+                                                <span class="fa fa-star"></span>
+                                            @endif
+                                        @endfor
+                                        <span>({{ $ratingCount }} {{ Str::plural('rating', $ratingCount) }})</span>
+                                    </div>
+                                    <!-- Display the feedback -->
+                                    {{--  <div class="feedback">
+                                        @foreach ($service->ratingsAndFeedback as $feedback)
+                                            <p>{{ $feedback->feedback }}</p>
+                                        @endforeach
+                                    </div>  --}}
                                 </div>
                                 <div class="card-footer">
                                     <!-- Button for editing or viewing -->
@@ -82,4 +105,16 @@
 
     </div>
 
+    <style>
+        .star-rating .fa-star,
+        .star-rating .fa-star-half-alt {
+            font-size: 1.5em;
+            color: #ddd;
+        }
+
+        .star-rating .fa-star.checked,
+        .star-rating .fa-star-half-alt.checked {
+            color: #f5b301;
+        }
+    </style>
 </x-serv-provider-layout>
