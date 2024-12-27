@@ -86,6 +86,36 @@
                                         {{ Str::limit($service->description, 20) }}</p>
                                     <p class="card-text"><strong>Location:</strong>
                                         {{ Str::limit($service->location, 20) }}</p>
+
+                                    <div class="star-rating">
+                                        @php
+                                            $averageRating = $service->ratingsAndFeedback->avg('rating');
+                                            $ratingCount = $service->ratingsAndFeedback->count();
+                                        @endphp
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= floor($averageRating))
+                                                <span class="fa fa-star checked"></span>
+                                            @elseif ($i == ceil($averageRating) && $averageRating - floor($averageRating) >= 0.5)
+                                                <span class="fa fa-star-half-alt checked"></span>
+                                            @else
+                                                <span class="fa fa-star"></span>
+                                            @endif
+                                        @endfor
+                                        <span>({{ $ratingCount }} {{ Str::plural('rating', $ratingCount) }})</span>
+                                    </div>
+
+                                    <style>
+                                        .star-rating .fa-star,
+                                        .star-rating .fa-star-half-alt {
+                                            font-size: 1.5em;
+                                            color: #ddd;
+                                        }
+
+                                        .star-rating .fa-star.checked,
+                                        .star-rating .fa-star-half-alt.checked {
+                                            color: #f5b301;
+                                        }
+                                    </style>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <!-- View Details Button -->
