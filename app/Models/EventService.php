@@ -39,4 +39,9 @@ class EventService extends Model
     {
         return $this->belongsTo(User::class, 'service_provider_id'); // Replace 'user_id' with the correct foreign key
     }
+
+    public function ratingsAndFeedback()
+    {
+        return $this->hasMany(RatingAndFeedback::class);
+    }
 }
