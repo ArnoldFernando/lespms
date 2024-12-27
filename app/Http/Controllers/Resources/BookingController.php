@@ -163,4 +163,17 @@ class BookingController extends Controller
 
         return view('Client.booking.show', compact('eventService'));
     }
+
+
+    public function showCompleteBookings()
+    {
+        $bookings = Booking::with(['eventService', 'eventService.ratingsAndFeedback' => function ($query) {
+            $query->where('user_id', auth()->id());
+        }])
+            ->where('user_id', auth()->id())
+            ->where('status', 'completed')
+            ->get();
+
+        return view('Client.booking.completed', compact('bookings'));
+    }
 }

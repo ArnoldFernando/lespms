@@ -19,7 +19,7 @@ class EventServiceController extends Controller
     public function index()
     {
         //
-        $services = EventService::where('service_provider_id', auth()->id())->get();
+        $services = EventService::with('ratingsAndFeedback')->where('service_provider_id', auth()->id())->get();
         return view('service.index', compact('services'));
     }
 
