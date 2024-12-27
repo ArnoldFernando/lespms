@@ -15,9 +15,10 @@ use App\Http\Controllers\Resources\NotificationController;
 use App\Http\Controllers\ServiceProvider\BlockuserController;
 use App\Http\Controllers\ServiceProvider\DashboardController as ServiceProviderDashboardController;
 use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
-
+use App\Http\Controllers\RatingAndFeedbackController;
 use App\Mail\notifmail;
 use App\Livewire\Chat;
+use App\Models\RatingAndFeedback;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,9 @@ Route::prefix('client')
         Route::get('dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
         Route::resource('service', ServiceController::class);
         Route::resource('bookings', BookingController::class);
+        Route::resource('ratings', RatingAndFeedbackController::class);
+
+        Route::get('/completed/bookings', [BookingController::class, 'showCompleteBookings'])->name('bookings.complete');
         Route::get('notifications/{id}', [NotificationController::class, 'showuser'])->name('notifications.show');
         Route::get('profile', [ProfileController::class, 'getClientProfile'])->name('profile');
         Route::get('profile/edit', [ProfileController::class, 'editClientProfile'])->name('profile.edit');
