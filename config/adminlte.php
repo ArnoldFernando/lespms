@@ -64,8 +64,8 @@ return [
     */
 
     'logo' => '<b>LESPMS</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => 'assets/img/Logo/logo1.jpg',
+    'logo_img_class' => 'brand-image img-circle elevation-1',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -110,7 +110,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
@@ -154,8 +154,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -191,12 +191,12 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand' => 'bg-olive',
+    'classes_brand_text' => 'fw-bold',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-olive elevation-2',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -305,15 +305,16 @@ return [
             'topnav_right' => true,
         ],
         // Sidebar items:
-        ['header' => 'System'],
+        ['header' => 'NAVIGATION'],
         [
             'text' => 'Dashboard',
             'url' => '/admin/dashboard',
             'icon' => 'fas fa-fw fa-home',
             // 'label' => 4,
             'label_color' => 'success',
-        ],[
-            'text' => 'Users',
+        ],
+        [
+            'text' => 'Users List',
             'url' => '/admin/users',
             'icon' => 'fas fa-fw fa-user',
             // 'label' => 4,
