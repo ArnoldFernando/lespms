@@ -1,23 +1,40 @@
 <x-app-layout>
+    <div class="content_header">
+        <h5 class="" style="font-weight:600;"> <i class="fa-solid fa-caret-right text-primary"
+                style="margin-right: 5px"></i>Dashboard</h5>
+        <hr class="mt-0">
+    </div>
     <div class="container">
-        <h1 class="text-center mb-4">Admin Dashboard</h1>
-
+        {{-- <h1 class="text-center mb-4">Admin Dashboard</h1> --}}
         <!-- First Row (Charts 1 and 2) -->
-        <div class="row mb-4 justify-content-center">
-            <div class="col-12 col-lg-4">
-                <canvas id="userDistributionChart"></canvas>
+        <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="userDistributionChart"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 col-lg-4">
-                <canvas id="eventServiceChart"></canvas>
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="eventServiceChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Second Row (Charts 3 and 4) -->
         <div class="row mb-4">
             <div class="col-12">
-                <canvas id="monthlyBookingsChart"></canvas>
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="monthlyBookingsChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 
     <script>

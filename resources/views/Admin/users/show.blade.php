@@ -10,8 +10,17 @@
             lightGallery(document.getElementById('image-gallery'));
         });
     </script>
-    <div class="container">
-        <h1>User Profile</h1>
+
+
+    <div class="content_header">
+        <h5 class="" style="font-weight:600;"> <i class="fa-solid fa-caret-right text-primary"
+                style="margin-right: 5px"></i>User Profile</h5>
+        <hr class="mt-0">
+    </div>
+
+
+    <div class="container-fluid">
+        {{-- <h1>User Profile</h1> --}}
         <div class="card mb-3">
             <div class="card-header">
                 <strong>{{ $user->name }}</strong>
@@ -25,8 +34,8 @@
                 @if ($user->image)
                     <a href="{{ asset('storage/' . str_replace('public/', '', $user->image)) }}"
                         data-lightbox="image-gallery">
-                        <img src="{{ asset('storage/' . str_replace('public/', '', $user->image)) }}" alt="Profile Image"
-                            class="img-thumbnail" style="max-width: 200px;">
+                        <img src="{{ asset('storage/' . str_replace('public/', '', $user->image)) }}"
+                            alt="Profile Image" class="img-thumbnail" style="max-width: 200px;">
                     </a>
                 @else
                     <p>No profile image available.</p>
