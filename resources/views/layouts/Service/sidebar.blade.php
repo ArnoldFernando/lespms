@@ -31,39 +31,52 @@
      </div>
 
      <li class="nav-item">
+         @php
+             $isEventServicesActive =
+                 request()->routeIs('service-provider.services.create') ||
+                 request()->routeIs('service-provider.services.index');
+         @endphp
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-             aria-expanded="true" aria-controls="collapseOne">
+             aria-expanded="{{ $isEventServicesActive ? 'true' : 'false' }}" aria-controls="collapseOne">
              <i class="fas fa-fw fa-cog"></i>
              <span>Event Services</span>
          </a>
-         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+         <div id="collapseOne" class="collapse {{ $isEventServicesActive ? 'show' : '' }}" aria-labelledby="headingTwo"
+             data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  @if (Auth::user()->verified)
-                     <a class="collapse-item" href="{{ route('service-provider.services.create') }}">Add Service</a>
-                     <a class="collapse-item" href="{{ route('service-provider.services.index') }}">My Services</a>
+                     <a class="collapse-item {{ request()->routeIs('service-provider.services.create') ? 'active' : '' }}"
+                         href="{{ route('service-provider.services.create') }}">Add Service</a>
+                     <a class="collapse-item {{ request()->routeIs('service-provider.services.index') ? 'active' : '' }}"
+                         href="{{ route('service-provider.services.index') }}">My Services</a>
                  @else
                      <p class="text-warning text-center">Wait for your account to be verified</p>
                  @endif
-
-
              </div>
          </div>
      </li>
+
      {{-- bookings management --}}
      <li class="nav-item">
+         @php
+             $isBookingsActive =
+                 request()->is('service-provider/bookings') &&
+                 in_array(request('status'), ['pending', 'confirmed', 'canceled']);
+         @endphp
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bookings"
-             aria-expanded="true" aria-controls="bookings">
+             aria-expanded="{{ $isBookingsActive ? 'true' : 'false' }}" aria-controls="bookings">
              <i class="fas fa-fw fa-cog"></i>
              <span>Bookings</span>
          </a>
-         <div id="bookings" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+         <div id="bookings" class="collapse {{ $isBookingsActive ? 'show' : '' }}" aria-labelledby="headingTwo"
+             data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  @if (Auth::user()->verified)
-                     <a class="collapse-item"
+                     <a class="collapse-item {{ request()->is('service-provider/bookings') && request('status') == 'pending' ? 'active' : '' }}"
                          href="{{ route('service-provider.bookings.index', ['status' => 'pending']) }}">Pending</a>
-                     <a class="collapse-item"
+                     <a class="collapse-item {{ request()->is('service-provider/bookings') && request('status') == 'confirmed' ? 'active' : '' }}"
                          href="{{ route('service-provider.bookings.index', ['status' => 'confirmed']) }}">Confirmed</a>
-                     <a class="collapse-item"
+                     <a class="collapse-item {{ request()->is('service-provider/bookings') && request('status') == 'canceled' ? 'active' : '' }}"
                          href="{{ route('service-provider.bookings.index', ['status' => 'canceled']) }}">Canceled</a>
                  @else
                      <p class="text-warning text-center">Wait for your account to be verified</p>
