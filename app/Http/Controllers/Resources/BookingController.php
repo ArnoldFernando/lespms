@@ -17,7 +17,7 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         $query = Booking::with(['eventService' => function ($query) {
-            $query->select('id', 'service_provider_id');
+            $query->select('id', 'service_provider_id', 'image'); // Ensure 'image' is selected
         }, 'user' => function ($query) {
             $query->select('id', 'is_blocked');
         }]);
