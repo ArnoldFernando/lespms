@@ -18,6 +18,7 @@ class EventService extends Model
         'title',
         'description',
         'rate',
+        'number_of_guests',
         'status',
         'assigned_to',
         'location',
@@ -43,5 +44,10 @@ class EventService extends Model
     public function ratingsAndFeedback()
     {
         return $this->hasMany(RatingAndFeedback::class);
+    }
+
+    public function serviceProvider()
+    {
+        return $this->belongsTo(User::class, 'service_provider_id');
     }
 }
