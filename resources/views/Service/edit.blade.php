@@ -37,6 +37,13 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group">
+                        <label for="number_of_guest">Number of Guests (Total person to Accomodate)</label>
+                        <input type="number" name="number_of_guests" id="number_of_guests" class="form-control"
+                            value="{{ isset($eventService) ? $eventService->number_of_guests : old('number_of_guests') }}">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control">
                             <option value="available"
