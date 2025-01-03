@@ -73,6 +73,7 @@
             <div class="col-12">
                 <p><strong>Description:</strong> {{ $eventService->description }}</p>
                 <p><strong>Rate:</strong> ${{ $eventService->rate }}</p>
+                <p><strong>Number of Guests:</strong> {{ $eventService->number_of_guests ?? 'null' }} Guest</p>
                 <p><strong>Status:</strong> {{ ucfirst($eventService->status) }}</p>
                 <p><strong>Assigned To:</strong> {{ $eventService->assigned_to }}</p>
                 <p><strong>Location:</strong> {{ $eventService->location }}</p>
