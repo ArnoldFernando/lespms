@@ -16,6 +16,7 @@ use App\Http\Controllers\ServiceProvider\BlockuserController;
 use App\Http\Controllers\ServiceProvider\DashboardController as ServiceProviderDashboardController;
 use App\Http\Controllers\Client\DashboardController as ClientDashboardController;
 use App\Http\Controllers\RatingAndFeedbackController;
+use App\Http\Controllers\WelcomeController;
 use App\Mail\notifmail;
 use App\Livewire\Chat;
 use App\Models\RatingAndFeedback;
@@ -31,9 +32,7 @@ use App\Models\RatingAndFeedback;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
 Auth::routes();
 

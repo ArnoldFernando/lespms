@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="rate">Number of guest (Total person to Accomodate)</label>
+                            <label for="number_of_guest">Number of Guests (Total person to Accomodate)</label>
                             <input type="number" name="number_of_guests" id="number_of_guests" class="form-control"
                                 value="{{ isset($eventService) ? $eventService->number_of_guests : old('number_of_guests') }}"
                                 required>
