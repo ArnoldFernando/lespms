@@ -22,7 +22,8 @@ class ServiceController extends Controller
         if (auth()->check() && auth()->user()->is_blocked) {
             $services = collect();  // No services shown to blocked user
         } else {
-            $services = EventService::with('users')
+            $services = EventService::with(['users', 'bookings'])
+
                 ->whereHas('users', function ($query) {
                     $query->where('verified', true);
                 })
