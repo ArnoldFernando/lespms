@@ -16,11 +16,14 @@ class BookingController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Booking::with(['eventService' => function ($query) {
-            $query->select('id', 'service_provider_id', 'image'); // Ensure 'image' is selected
-        }, 'user' => function ($query) {
-            $query->select('id', 'is_blocked');
-        }]);
+        $query = Booking::with([
+            'eventService' => function ($query) {
+                $query->select('id', 'service_provider_id', 'image'); // Ensure 'image' is selected
+            },
+            'user' => function ($query) {
+                $query->select('id', 'is_blocked');
+            }
+        ]);
         $query->orderBy('booking_date');
 
         $allowedStatuses = ['pending', 'confirmed', 'canceled', 'completed'];  // Define the allowed statuses
@@ -141,7 +144,13 @@ class BookingController extends Controller
             ];
 
             // Send email notification to the service provider
-            Mail::to($serviceProvider->email)->send(new notifmail($bookingDetails));
+
+            try {
+                Mail::to($serviceProvider->email)->send(new notifmail($bookingDetails));
+            } catch (\Exception $e) {
+                // Log the error or handle it as needed
+                \Log::error('Failed to send email notification: ' . $e->getMessage());
+            }
         }
 
         // Respond to the AJAX request
@@ -167,9 +176,12 @@ class BookingController extends Controller
 
     public function showCompleteBookings()
     {
-        $bookings = Booking::with(['eventService', 'eventService.ratingsAndFeedback' => function ($query) {
-            $query->where('user_id', auth()->id());
-        }])
+        $bookings = Booking::with([
+            'eventService',
+            'eventService.ratingsAndFeedback' => function ($query) {
+                $query->where('user_id', auth()->id());
+            }
+        ])
             ->where('user_id', auth()->id())
             ->where('status', 'completed')
             ->get();
