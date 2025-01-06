@@ -219,8 +219,9 @@
                                 <div class="col-lg-5">
                                     <div class="profile d-flex align-items-center gap-3">
                                         <div>
-                                            <h4 class="profile-name">Buguey Cagayan</h4>
-                                            <p class="profile-position">Founder & Event Specialist</p>
+                                            <h4 class="profile-name">Buguey Tourism</h4>
+                                            <p class="profile-position">Connecting You with Exceptional Event Services
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
