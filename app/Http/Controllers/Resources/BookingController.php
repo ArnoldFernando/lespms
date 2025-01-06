@@ -39,7 +39,7 @@ class BookingController extends Controller
             }
 
             // Paginate non-blocked bookings
-            $nonBlockedBookings = $query->clone()->whereHas('user', function ($query) {
+            $nonBlockedBookings = $query->with('eventService')->clone()->whereHas('user', function ($query) {
                 $query->where('is_blocked', false);
             })->paginate(8)->appends(['status' => $request->input('status')]);
 
@@ -121,6 +121,8 @@ class BookingController extends Controller
             'user_id' => auth()->id(),
             'event_service_id' => $request->event_service_id,
             'booking_date' => $request->booking_date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'notes' => $request->notes,
         ]);
 

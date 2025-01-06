@@ -13,8 +13,9 @@ class ServiceController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query');
         $services = EventService::query();
 
         // If the user is blocked, return an empty collection of services
@@ -24,6 +25,10 @@ class ServiceController extends Controller
             $services = EventService::with('users')
                 ->whereHas('users', function ($query) {
                     $query->where('verified', true);
+                })
+                ->when($query, function ($q) use ($query) {
+                    return $q->where('title', 'LIKE', "%{$query}%")
+                        ->orWhere('description', 'LIKE', "%{$query}%");
                 })
                 ->paginate(6);
         }
