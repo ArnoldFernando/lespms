@@ -39,7 +39,7 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Create an User Account!</h1>
                             </div>
                             <form method="POST" action="{{ route('register') }}" class="user">
                                 @csrf
@@ -47,7 +47,8 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text"
                                             class="form-control form-control-user @error('name') is-invalid @enderror"
-                                            id="name" name="name" placeholder="First Name">
+                                            id="name" name="name" placeholder="First Name"
+                                            value="{{ old('name') }}">
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
@@ -57,8 +58,8 @@
                                     <div class="col-sm-6">
                                         <input type="text"
                                             class="form-control form-control-user @error('name') is-invalid @enderror"
-                                            id="name" placeholder="Last Name" name="name" required
-                                            autocomplete="name" autofocus>
+                                            id="name" placeholder="Last Name" name="name"
+                                            value="{{ old('name') }}" required autocomplete="name" autofocus>
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
@@ -67,8 +68,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email"
-                                        class="form-control form-control-user @error('email') is-invalid @enderror"
+                                    <input type="email" name="email" value="{{ old('email') }}"
+                                        class="form-control
+                                        form-control-user @error('email') is-invalid @enderror"
                                         id="email" placeholder="Email Address" required autocomplete="email">
                                     @error('email')
                                         <div class="invalid-feedback">

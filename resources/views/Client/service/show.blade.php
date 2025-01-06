@@ -39,20 +39,13 @@
                         class="fa-solid fa-arrow-left me-1"></i>Back to Services</a>
 
             </div>
-            @if ($eventService->status === 'available')
-                <div class="col-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                        data-target="#bookingModal-{{ $eventService->id }}">
-                        Book Service
-                    </button>
-                </div>
-            @else
-                <div class="col-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-warning" disabled>
-                        Service is booked
-                    </button>
-                </div>
-            @endif
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-warning" data-toggle="modal"
+                    data-target="#bookingModal-{{ $eventService->id }}">
+                    Book Service
+                </button>
+            </div>
+
         </div>
 
         <hr class="mt-0">

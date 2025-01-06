@@ -46,7 +46,7 @@
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text"
+                                        <input type="text" value="{{ old('name') }}"
                                             class="form-control form-control-user @error('name') is-invalid @enderror"
                                             id="first-name" name="name" placeholder="First Name"
                                             value="{{ old('first_name') }}">
@@ -57,7 +57,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text"
+                                        <input type="text" value="{{ old('name') }}"
                                             class="form-control form-control-user @error('last_name') is-invalid @enderror"
                                             id="last-name" name="name" placeholder="Last Name"
                                             value="{{ old('last_name') }}" required>
@@ -69,9 +69,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email"
+                                    <input type="email" name="email" value="{{ old('email') }}"
                                         class="form-control form-control-user @error('email') is-invalid @enderror"
-                                        id="email" placeholder="Email Address" value="{{ old('email') }}" required>
+                                        id="email" placeholder="Email Address" value="{{ old('email') }}"
+                                        required>
                                     @error('email')
                                         <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>

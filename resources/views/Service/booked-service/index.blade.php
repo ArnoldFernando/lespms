@@ -65,7 +65,14 @@
                                     class="badge {{ $booking->status == 'confirmed' ? 'bg-success' : ($booking->status == 'pending' ? 'bg-warning' : 'bg-danger') }}">
                                     {{ ucfirst($booking->status) }}
                                 </span><br>
-                                <strong>Special Requests:</strong> {{ $booking->special_requests ?? 'None' }}
+                                <strong>Time:</strong>
+                                @if ($booking->start_time && $booking->end_time)
+                                    {{ \Carbon\Carbon::parse($booking->start_time)->format('h:i A') }} to
+                                    {{ \Carbon\Carbon::parse($booking->end_time)->format('h:i A') }} <br>
+                                @else
+                                    Not Set <br>
+                                @endif
+                                <strong>Special Requests:</strong> {{ $booking->notes ?? 'None' }}
                             </p>
 
                             <div class="d-flex justify-content-between">

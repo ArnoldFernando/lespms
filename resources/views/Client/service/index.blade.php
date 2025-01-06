@@ -45,10 +45,32 @@
         </style>
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h5 class="h5 mb-0 text-black">Event List</h5>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <div>
+                <h5 class="h5 mb-0 text-black">Event List</h5>
+
+            </div>
             {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
+
+            <!-- Topbar Search -->
+            <div>
+
+                <form action="{{ route('client.service.index') }}" method="GET"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control bg-light border-0 small"
+                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"
+                            value="{{ request('query') }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
 
         <hr class="mt-0">
@@ -60,10 +82,31 @@
             @else
                 <div class="row">
                     @foreach ($services as $service)
+                        @php
+                            $isUnavailableNow = $service->bookings->contains(function ($booking) {
+                                $today = \Carbon\Carbon::today()->toDateString();
+                                $now = \Carbon\Carbon::now();
+
+                                // Convert start_time and end_time to Carbon instances
+                                $startTime = \Carbon\Carbon::parse($booking->start_time);
+                                $endTime = \Carbon\Carbon::parse($booking->end_time);
+
+                                // Check if the booking date is today, the status is confirmed, and the current time is after start_time but before end_time
+                                return $booking->booking_date == $today &&
+                                    $booking->status == 'confirmed' &&
+                                    $startTime != null &&
+                                    $endTime != null &&
+                                    $now->isAfter($startTime) &&
+                                    $now->isBefore($endTime);
+                            });
+                        @endphp
+
+
+
                         <div class="col-md-4 mb-4">
                             <div class="card shadow-sm border-light rounded position-relative"
-                                @if ($service->status == 'unavailable') style="opacity: 0.5; pointer-events: none;" @endif>
-                                @if ($service->status == 'unavailable')
+                                @if ($isUnavailableNow) style="opacity: 0.5; pointer-events: none;" @endif>
+                                @if ($isUnavailableNow)
                                     <!-- Unavailable Overlay Text -->
                                     <div class="unavailable-overlay">
                                         <span>UNAVAILABLE</span>
@@ -126,17 +169,15 @@
 
                                     <!-- Book Service Button -->
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#bookingModal-{{ $service->id }}"
-                                        @if ($service->status == 'unavailable') disabled @endif>
-                                        <i class="fas fa-calendar-check"></i> Book Service
+                                        data-target="#bookingModal-{{ $service->id }}" {{--  @if ($service->status == 'unavailable') disabled @endif>  --}} <i
+                                        class="fas fa-calendar-check"></i> Book Service
                                     </button>
                                 </div>
 
                                 <!-- Chat with Service Provider -->
                                 <a href="{{ route('client.chat', ['receiverId' => $service->service_provider_id]) }}"
                                     class="btn btn-success btn-sm d-block mt-1 mb-2 mx-2 text-center"
-                                    @if ($service->status == 'unavailable') disabled @endif>
-                                    <i class="fas fa-comment-alt"></i> Chat with Service Provider
+                                    {{--  @if ($service->status == 'unavailable') disabled @endif>  --}} <i class="fas fa-comment-alt"></i> Chat with Service Provider
                                 </a>
 
                                 <!-- Modal -->
@@ -168,17 +209,28 @@
                                                     </div>
 
                                                     <div class="form-group">
+                                                        <label for="start_time-{{ $service->id }}">Start Time:</label>
+                                                        <input type="time" id="start_time-{{ $service->id }}"
+                                                            name="start_time" class="form-control" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="end_time-{{ $service->id }}">End Time:</label>
+                                                        <input type="time" id="end_time-{{ $service->id }}"
+                                                            name="end_time" class="form-control" required>
+                                                    </div>
+
+
+                                                    <div class="form-group">
                                                         <label for="notes-{{ $service->id }}">Additional
                                                             Notes:</label>
-                                                        <textarea id="notes-{{ $service->id }}" name="notes" class="form-control" placeholder="Any special requests"
-                                                            @if ($service->status == 'unavailable') disabled @endif></textarea>
+                                                        <textarea id="notes-{{ $service->id }}" name="notes" class="form-control" placeholder="Any special requests"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary"
-                                                        @if ($service->status == 'unavailable') disabled @endif>Book Service
+                                                    <button type="submit" class="btn btn-primary">Book Service
                                                     </button>
                                                 </div>
                                             </form>
